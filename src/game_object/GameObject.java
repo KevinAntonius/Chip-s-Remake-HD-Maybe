@@ -15,7 +15,6 @@ import java.awt.Point;
  * @author STEVEN
  */
 public abstract class GameObject {
-    public String str="tes";
     public Image sprite=null;
     protected boolean canBeDestroy=true;
     protected boolean canBeUse;
