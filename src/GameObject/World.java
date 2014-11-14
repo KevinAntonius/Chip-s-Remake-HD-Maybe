@@ -19,4 +19,18 @@ public class World {
     public GameObject getObjectAt(int x,int y){
         return this.object[x][y];
     }
+    
+    public int getBaris(){
+        return this.object[0].length;
+    }
+    
+    public int getKolom(){
+        return this.object.length;
+    }
+    
+    public void setGameObjectAt(int x, int y, GameObject newGO){
+        object[x][y]=newGO;
+    }
+    
+    
 }

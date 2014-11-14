@@ -14,6 +14,7 @@ public class Inventory {
         shoes=new Shoes[manyShoes];
     }
     
+    
     /**
      * Metod mengembalikan boolean yang menandakan bahwa di inventory ada Shoes yang diperlukan
      * @param neededShoes Shoes yang diperlukan
@@ -26,5 +27,15 @@ public class Inventory {
             }
         }
         return false;
+    }
+    
+    public void addShoes(Shoes newShoes){
+        boolean terisi=false;
+        for(int i=0;i<shoes.length&&!terisi;i++){
+            if(shoes[i]==null){
+                this.shoes[i]=newShoes;
+                terisi=true;
+            }
+        }
     }
 }

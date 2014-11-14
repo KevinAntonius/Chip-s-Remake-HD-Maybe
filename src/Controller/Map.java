@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author STEVEN
  */
 public class Map {
-    protected String fileName;
+    protected String  fileName;
     protected File mp3File;
     protected String isiMap="";
     public Map(File mp3File)

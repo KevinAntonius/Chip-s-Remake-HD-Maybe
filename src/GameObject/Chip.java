@@ -11,9 +11,14 @@ package GameObject;
 public class Chip {
     private Inventory inventory;
     private String imagePath;
+    private boolean death;
     private int x;
     private int y;
             
+    public Chip(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
     /**
      * metod untuk Chip berjalan 
      * Jika:
@@ -44,5 +49,28 @@ public class Chip {
     }
     public void setPath(String newPath){
         this.imagePath=newPath;
+    }
+    
+    public int getX(){
+        return this.x;
+    }
+    
+    public int getY(){
+        return this.y;
+    }
+    
+    public boolean isDead(){
+        return this.death;
+    }
+    
+    /**
+     * Metod untuk mengeset Chip untuk mati
+     */
+    public void dead(){
+        this.death=true;
+    }
+    
+    public void getShoes(Shoes shoe){
+        this.inventory.addShoes(shoe);
     }
 }
