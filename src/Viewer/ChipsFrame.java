@@ -27,9 +27,9 @@ public class ChipsFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         gamePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        timerLabel = new javax.swing.JLabel();
         timerTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        iCLabel = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         redShoesPanel = new javax.swing.JPanel();
         blueShoesPanel = new javax.swing.JPanel();
@@ -48,11 +48,11 @@ public class ChipsFrame extends javax.swing.JFrame {
             .addGap(0, 481, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Timer");
+        timerLabel.setText("Timer");
 
         timerTextField.setText("000000000000");
 
-        jLabel2.setText("Integrated Circuit");
+        iCLabel.setText("Integrated Circuit");
 
         jTextField1.setText("000000000000");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +95,8 @@ public class ChipsFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
+                        .addComponent(timerLabel)
+                        .addComponent(iCLabel)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(10, 10, 10)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,11 +118,11 @@ public class ChipsFrame extends javax.swing.JFrame {
                         .addComponent(gamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel1)
+                        .addComponent(timerLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(timerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(iCLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
@@ -178,11 +178,11 @@ public class ChipsFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel blueShoesPanel;
     private javax.swing.JPanel gamePanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel iCLabel;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel redShoesPanel;
+    private javax.swing.JLabel timerLabel;
     private javax.swing.JTextField timerTextField;
     // End of variables declaration//GEN-END:variables
 }
