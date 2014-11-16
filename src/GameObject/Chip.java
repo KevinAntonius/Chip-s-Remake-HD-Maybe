@@ -4,6 +4,9 @@
  */
 package GameObject;
 
+import java.awt.Image;
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -14,11 +17,13 @@ public class Chip {
     private boolean death;
     private int x;
     private int y;
+    private URL standDownURL;
             
     public Chip(int x, int y){
         this.x=x;
         this.y=y;
         this.death=false;
+        this.standDownURL = getClass().getClassLoader().getResource("downStand.jpg");
     }
     /**
      * metod untuk Chip berjalan 
@@ -81,5 +86,9 @@ public class Chip {
     
     public boolean shoesCheck(Shoes requirementShoes){
         return this.inventory.checkIsThere(requirementShoes);
+    }
+    
+    public URL sendURL(){
+        return this.standDownURL;
     }
 }

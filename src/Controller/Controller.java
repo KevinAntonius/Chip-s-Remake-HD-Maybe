@@ -41,7 +41,9 @@ public class Controller {
            chip.move(x,y);
            this.deathCheck();
            this.itemCheck();
-           this.finishCheck();
+           if(this.finishCheck()){
+               this.nextLevel();
+           }
            
        }
        else{
@@ -74,7 +76,7 @@ public class Controller {
     private void itemCheck(){
         GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
         if(steven!=null){
-            if(steven.getName().equalsIgnoreCase("Blue Choes")){
+            if(steven.getName().equalsIgnoreCase("Blue Shoes")){
                 this.chip.getShoes((Shoes)steven);
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
             }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
