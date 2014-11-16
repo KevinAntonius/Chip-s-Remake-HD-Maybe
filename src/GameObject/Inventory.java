@@ -22,8 +22,10 @@ public class Inventory {
      */
     public boolean checkIsThere(Shoes neededShoes){
         for(int i=0;i<shoes.length;i++){
-            if(shoes[i].getName().equalsIgnoreCase(neededShoes.getName())){
-                return true;
+            if(shoes[i]!=null){
+                if(shoes[i].getName().equalsIgnoreCase(neededShoes.getName())){
+                    return true;
+                }
             }
         }
         return false;

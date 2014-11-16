@@ -9,7 +9,7 @@ package GameObject;
  * @author STEVEN
  */
 public class Chip {
-    private Inventory inventory;
+    private Inventory inventory=new Inventory(2);
     private String imagePath;
     private boolean death;
     private int x;
@@ -18,6 +18,7 @@ public class Chip {
     public Chip(int x, int y){
         this.x=x;
         this.y=y;
+        this.death=false;
     }
     /**
      * metod untuk Chip berjalan 
@@ -30,19 +31,21 @@ public class Chip {
      * </ul>
      * @param direction arah pemain
      */
-    public void move(String direction){
-        if(direction.equalsIgnoreCase("atas")){
-        this.x=x--;
-        }
-        else if(direction.equalsIgnoreCase("bawah")){
-        this.x=x++;
-        }
-        else if(direction.equalsIgnoreCase("kiri")){
-        this.y=y--;
-        }
-        else if(direction.equalsIgnoreCase("kanan")){
-            this.y=y++;
-        }
+    public void move(int x, int y){
+//        if(direction.equalsIgnoreCase("atas")){
+//        this.x=x--;
+//        }
+//        else if(direction.equalsIgnoreCase("bawah")){
+//        this.x=x++;
+//        }
+//        else if(direction.equalsIgnoreCase("kiri")){
+//        this.y=y--;
+//        }
+//        else if(direction.equalsIgnoreCase("kanan")){
+//            this.y=y++;
+//        }
+        this.x=x;
+        this.y=y;
     }
     public String getPath(){
         return this.imagePath;
@@ -59,18 +62,24 @@ public class Chip {
         return this.y;
     }
     
-    public boolean isDead(){
+    public boolean getDead(){
         return this.death;
     }
     
     /**
      * Metod untuk mengeset Chip untuk mati
      */
-    public void dead(){
+    public void isDead(){
         this.death=true;
     }
     
     public void getShoes(Shoes shoe){
-        this.inventory.addShoes(shoe);
+        if(shoe!=null){
+            this.inventory.addShoes(shoe);
+        }
+    }
+    
+    public boolean shoesCheck(Shoes requirementShoes){
+        return this.inventory.checkIsThere(requirementShoes);
     }
 }

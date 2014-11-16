@@ -32,5 +32,9 @@ public class World {
         object[x][y]=newGO;
     }
     
+    public void destroyObjectAt(int x, int y){
+        object[x][y]=null;
+    }
+    
     
 }

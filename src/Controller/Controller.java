@@ -19,68 +19,82 @@ public class Controller {
         int x=chip.getX();
         int y=chip.getY();
         if(direction == 2){
-            x-=1; 
+            x+=1; 
         }else if(direction == 4){
             y-=1;
         }else if(direction == 6){
             y+=1;
         }else if(direction == 8){
-            x+=1;
+            x-=1;
         }
        if(!this.wallCheck(x,y)){
-           String str =  "";
-            if(direction == 2){
-                str = "bawah";
-            }else if(direction == 4){
-                str = "kiri";
-            }else if(direction == 6){
-                str = "kanan";
-            }else if(direction == 8){
-                str = "atas";
-            }
-            chip.move(x,y);
+//           String str =  "";
+//            if(direction == 2){
+//                str = "bawah";
+//            }else if(direction == 4){
+//                str = "kiri";
+//            }else if(direction == 6){
+//                str = "kanan";
+//            }else if(direction == 8){
+//                str = "atas";
+//            }
+           chip.move(x,y);
            this.deathCheck();
+           this.itemCheck();
+           this.finishCheck();
            
        }
        else{
-           this.tryOpenWallOrBarrier(x, y);
+           if(this.tryOpenWallOrBarrier(x, y)){
+               this.world.destroyObjectAt(x, y);
+           }
        }
     }
     
     private boolean wallCheck(int x, int y){
+        if(world.getObjectAt(x,y)==null){
+            return false;
+        }
         return (world.getObjectAt(x,y).getName().equalsIgnoreCase("Wall")||world.getObjectAt(x, y).getName().equalsIgnoreCase("Barrier"));
     }
     
     private boolean deathCheck(){
         GameObject kevin =  world.getObjectAt(chip.getX(), chip.getY());
-        if(kevin.getName().equalsIgnoreCase("Fire Floor")){
-            chip.dead();
-        }else if(kevin.getName().equalsIgnoreCase("Pool")){
-            chip.dead();
+        if(kevin!=null){
+             if(kevin.getName().equalsIgnoreCase("Fire Floor")||kevin.getName().equalsIgnoreCase("Pool")){
+                Traps trap=(Traps) kevin;
+                if(!chip.shoesCheck(trap.getRequirementShoes())){
+                chip.isDead();
+                }  
+                return chip.getDead();
+            }
         }
-        return chip.isDead();
+            return false;
     }
-    
     private void itemCheck(){
         GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
-        if(steven.getName().equalsIgnoreCase("Blue Choes")){
-            this.chip.getShoes((Shoes)steven);
-            this.world.destroyObjectAt(chip.getX(),chip.getY());
-        }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
-            this.chip.getShoes((Shoes)steven);
-            this.world.destroyObjectAt(chip.getX(),chip.getY());
-        }else if(steven.getName().equalsIgnoreCase("IC")){
-            //pikirin lagi
-            IC ic=(IC)steven;
-            ic.getIC();
-            this.world.destroyObjectAt(chip.getX(),chip.getY());
-        }
+        if(steven!=null){
+            if(steven.getName().equalsIgnoreCase("Blue Choes")){
+                this.chip.getShoes((Shoes)steven);
+                this.world.destroyObjectAt(chip.getX(),chip.getY());
+            }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
+                this.chip.getShoes((Shoes)steven);
+                this.world.destroyObjectAt(chip.getX(),chip.getY());
+            }else if(steven.getName().equalsIgnoreCase("IC")){
+                //pikirin lagi
+                IC ic=(IC)steven;
+                ic.getIC();
+                this.world.destroyObjectAt(chip.getX(),chip.getY());
+            }
+        }   
     }
     
     private boolean finishCheck(){
         GameObject evan = world.getObjectAt(chip.getX(),chip.getY());
-        if(evan.getName().equalsIgnoreCase("Finish")){
-            return true;
+        if(evan!=null){
+            if(evan.getName().equalsIgnoreCase("Finish")){
+                return true;
+            }
         }
         return false;
     }
@@ -106,9 +120,16 @@ public class Controller {
        String []split=str.split("\n");
        this.world=new World((Integer.parseInt(split[0])),(Integer.parseInt(split[1])));
        for(int i=0;i<this.world.getKolom();i++){
+           int x=i;
            for(int j=0;j<this.world.getBaris();j++){
                GameObject go=null;
-               String tempObject=split[2+i].substring(j, 1);
+               String tempObject="";
+               if(j==this.world.getBaris()-1){
+                   tempObject=split[2+i].substring(j);
+               }
+               else{
+                    tempObject=split[2+i].substring(j, j+1);
+               }
                if(tempObject.equalsIgnoreCase("w")){
                    go=new NormalWall();
                }

@@ -15,16 +15,16 @@ import java.util.Scanner;
  */
 public class Map {
     protected String  fileName;
-    protected File mp3File;
+    protected File mapTxt;
     protected String isiMap="";
-    public Map(File mp3File)
+    public Map(File mapTxt)
 	{
-            this.mp3File=mp3File;
+            this.mapTxt=mapTxt;
 		this.fileName=null;
 		try
 		{
-			Scanner sc = new Scanner(mp3File);
-			this.fileName=mp3File.getCanonicalPath();
+			Scanner sc = new Scanner(mapTxt);
+			this.fileName=mapTxt.getCanonicalPath();
                         String temp=sc.next();
                         if(temp.equalsIgnoreCase("-Start-")){
                             temp=sc.next();
