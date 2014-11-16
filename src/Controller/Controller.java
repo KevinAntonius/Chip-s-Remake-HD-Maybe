@@ -16,7 +16,18 @@ public class Controller {
     private GameObject object;
     private MapIterable maps;
     public void chipMove(int direction){
-       if(!this.wallCheck(direction)){
+        int x=chip.getX();
+        int y=chip.getY();
+        if(direction == 2){
+            x-=1; 
+        }else if(direction == 4){
+            y-=1;
+        }else if(direction == 6){
+            y+=1;
+        }else if(direction == 8){
+            x+=1;
+        }
+       if(!this.wallCheck(x,y)){
            String str =  "";
             if(direction == 2){
                 str = "bawah";
@@ -27,23 +38,17 @@ public class Controller {
             }else if(direction == 8){
                 str = "atas";
             }
-            chip.move(str);
+            chip.move(x,y);
            this.deathCheck();
+           
+       }
+       else{
+           this.tryOpenWallOrBarrier(x, y);
        }
     }
     
-    private boolean wallCheck(int direction){
-        boolean isWall = false;
-        if(direction == 2){
-            isWall = world.getObjectAt(chip.getX()-1, chip.getY()).getName().equalsIgnoreCase("Wall");
-        }else if(direction == 4){
-            isWall = world.getObjectAt(chip.getX(), chip.getY()-1).getName().equalsIgnoreCase("Wall");
-        }else if(direction == 6){
-            isWall = world.getObjectAt(chip.getX(), chip.getY()+1).getName().equalsIgnoreCase("Wall");
-        }else if(direction == 8){
-            isWall = world.getObjectAt(chip.getX()+1, chip.getY()).getName().equalsIgnoreCase("Wall");
-        }
-        return isWall;
+    private boolean wallCheck(int x, int y){
+        return (world.getObjectAt(x,y).getName().equalsIgnoreCase("Wall")||world.getObjectAt(x, y).getName().equalsIgnoreCase("Barrier"));
     }
     
     private boolean deathCheck(){
@@ -60,12 +65,15 @@ public class Controller {
         GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
         if(steven.getName().equalsIgnoreCase("Blue Choes")){
             this.chip.getShoes((Shoes)steven);
+            this.world.destroyObjectAt(chip.getX(),chip.getY());
         }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
             this.chip.getShoes((Shoes)steven);
+            this.world.destroyObjectAt(chip.getX(),chip.getY());
         }else if(steven.getName().equalsIgnoreCase("IC")){
             //pikirin lagi
             IC ic=(IC)steven;
             ic.getIC();
+            this.world.destroyObjectAt(chip.getX(),chip.getY());
         }
     }
     
@@ -77,13 +85,10 @@ public class Controller {
         return false;
     }
     
-    //perbaikin barrier check.. seharusnya waktu mau jalan baru cek bukan saat ada di tempat 
-    private boolean barrierCheck(){
-        GameObject barrier = world.getObjectAt(chip.getX(),chip.getY());
-        if(barrier.getName().equalsIgnoreCase("Barrier")){
-            return true;
-        }
-        return false;
+    
+    private boolean tryOpenWallOrBarrier(int x, int y){
+        Wall barrier = (Wall) world.getObjectAt(x,y);
+        return barrier.tryOpen();
     }
     
     public Map start(String path){
@@ -136,7 +141,14 @@ public class Controller {
            }
        }
    }
-    
+   
+   public GameObject getGameObjectAt(int x, int y){
+       return this.world.getObjectAt(x, y);
+   }
+   
+   public Chip getChip(){
+       return this.chip;
+   }
     
     
 }
