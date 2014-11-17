@@ -5,6 +5,7 @@
 package Controller;
 
 import GameObject.*;
+import java.net.URL;
 
 /**
  *
@@ -173,5 +174,24 @@ public class Controller {
        return this.chip;
    }
     
+   /**
+     * Metod untuk mengeset URL pada GameObject di baris-x dan kolom-y
+     * @param x baris
+     * @param y kolom 
+     * @param URL URL baru
+     */
+    public void setURLAtObject(int x, int y,String URL){
+        this.world.setURLAtObject(x, y, URL);
+    }
     
+    
+    /**
+     * Metod untuk mendapatkan URL pada GameObject di baris-x dan kolom-y
+     * @param x baris
+     * @param y kolom
+     * @return URL pada GameObject di baris-x dan kolom-y
+     */
+    public URL sendURLAtObject(int x, int y){
+        return this.world.sendURLAtObject(x, y);
+    }
 }
