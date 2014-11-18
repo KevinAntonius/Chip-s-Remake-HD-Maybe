@@ -17,13 +17,19 @@ public class Chip {
     private boolean death;
     private int x;
     private int y;
-    private URL standDownURL;
+    private URL downStandURL;
+    private URL leftStandURL;
+    private URL upStandURL;
+    private URL rightStandURL;
             
     public Chip(int x, int y){
         this.x=x;
         this.y=y;
         this.death=false;
-        this.standDownURL = getClass().getClassLoader().getResource("downStand.jpg");
+        this.downStandURL = getClass().getClassLoader().getResource("downStand.jpg");
+        this.leftStandURL = getClass().getClassLoader().getResource("leftStand.jpg");
+        this.rightStandURL = getClass().getClassLoader().getResource("rightStand.jpg");
+        this.upStandURL = getClass().getClassLoader().getResource("upStand.jpg");
     }
     /**
      * metod untuk Chip berjalan 
@@ -88,7 +94,19 @@ public class Chip {
         return this.inventory.checkIsThere(requirementShoes);
     }
     
-    public URL sendURL(){
-        return this.standDownURL;
+    public URL sendDownStandURL(){
+        return this.downStandURL;
+    }
+    
+    public URL sendUpStandURL(){
+        return this.upStandURL;
+    }
+    
+    public URL sendLeftStandURL(){
+        return this.leftStandURL;
+    }
+    
+    public URL sendRightStandURL(){
+        return this.rightStandURL;
     }
 }
