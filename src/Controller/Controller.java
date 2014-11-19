@@ -173,7 +173,10 @@ public class Controller {
    public Chip getChip(){
        return this.chip;
    }
-    
+   
+   public URL sendURLChip(){
+       return this.chip.sendDownStandURL();
+   }
    /**
      * Metod untuk mengeset URL pada GameObject di baris-x dan kolom-y
      * @param x baris
