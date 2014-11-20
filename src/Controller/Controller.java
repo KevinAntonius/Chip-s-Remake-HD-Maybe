@@ -204,7 +204,16 @@ public class Controller {
         return this.world.sendURLAtObject(x, y);
     }
     
+
     public boolean getGameFinish(){
         return this.gameFinish;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public World getWorld(){
+        return this.world;
     }
 }
