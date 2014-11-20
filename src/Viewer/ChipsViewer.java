@@ -43,6 +43,10 @@ public class ChipsViewer extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img, this.posisiX, this.posisiY, null);
+        g.drawImage(img, this.posisiX*40, this.posisiY*40, null);
+    }
+    
+    public void moved(){
+        repaint();
     }
 }
