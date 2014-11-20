@@ -28,10 +28,12 @@ public class WorldViewer extends JPanel{
     public WorldViewer(Controller controller) throws IOException{
         this.controller =controller;
         this.currentURL = null;
+        Object nullExam = null;
         this.img = new Image[this.controller.getWorld().getKolom()][this.controller.getWorld().getBaris()];
         for(int i = 0;i<this.controller.getWorld().getBaris();i++){
             for(int j = 0;j<this.controller.getWorld().getKolom();j++){
-                if(this.controller.getGameObjectAt(j, j)!=null){
+                nullExam = this.controller.getGameObjectAt(i, j);
+                if(nullExam!=null){
                     this.currentURL = this.controller.sendURLAtObject(j, j);
                     this.img[i][j] = ImageIO.read(currentURL);
                 }
