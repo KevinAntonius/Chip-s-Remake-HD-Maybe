@@ -15,6 +15,7 @@ public class NormalWall extends Wall{
      */
     public NormalWall(){
      this.name="Wall";   
+        this.url=getClass().getClassLoader().getResource("wall.jpg");
     }
     
     /**

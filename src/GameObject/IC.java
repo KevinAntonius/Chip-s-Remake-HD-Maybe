@@ -16,6 +16,7 @@ public class IC extends GameObject{
      */
     public IC(){
         this.name="IC";
+        this.url=getClass().getClassLoader().getResource("intergratedCircuit.jpg");
         totalChip++;
     }
     

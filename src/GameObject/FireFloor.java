@@ -15,6 +15,7 @@ public class FireFloor extends Traps{
      */
     public FireFloor(){
         this.name="Fire Floor";
+        this.url=getClass().getClassLoader().getResource("lava.jpg");
     }
     
     /**

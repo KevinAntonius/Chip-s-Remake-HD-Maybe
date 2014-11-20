@@ -15,6 +15,7 @@ public class Pool extends Traps{
      */
     public Pool(){
         this.name="Pool";
+        this.url=getClass().getClassLoader().getResource("waterTrap.jpg");
     }
     
     /**

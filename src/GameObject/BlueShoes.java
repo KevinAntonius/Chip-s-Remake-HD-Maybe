@@ -15,5 +15,6 @@ public class BlueShoes extends Shoes {
      */
     public BlueShoes(){
         this.name="Blue Shoes";
+        this.url=getClass().getClassLoader().getResource("sepatu katak.jpg");
     }
 }
