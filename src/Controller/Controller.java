@@ -16,6 +16,7 @@ public class Controller {
     private World world; 
     private GameObject object;
     private MapIterable maps;
+    private boolean gameFinish;
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
@@ -29,21 +30,26 @@ public class Controller {
             x-=1;
         }
        if(!this.wallCheck(x,y)){
-//           String str =  "";
-//            if(direction == 2){
-//                str = "bawah";
-//            }else if(direction == 4){
-//                str = "kiri";
-//            }else if(direction == 6){
-//                str = "kanan";
-//            }else if(direction == 8){
-//                str = "atas";
-//            }
-           chip.move(x,y);
+            if(direction == 2){
+                chip.moveDown();
+            }else if(direction == 4){
+                chip.moveLeft();
+            }else if(direction == 6){
+                chip.moveRight();
+            }else if(direction == 8){
+                chip.moveUp();
+            }
+           //chip.move(x,y);
            this.deathCheck();
            this.itemCheck();
            if(this.finishCheck()){
-               this.nextLevel();
+               Map newMap=this.nextLevel();
+               if(newMap==null){
+                   this.gameFinish=true;
+               }
+               else{
+                  this.implementsMapToWorld(newMap);
+               }
            }
            
        }
@@ -196,5 +202,9 @@ public class Controller {
      */
     public URL sendURLAtObject(int x, int y){
         return this.world.sendURLAtObject(x, y);
+    }
+    
+    public boolean getGameFinish(){
+        return this.gameFinish;
     }
 }

@@ -9,6 +9,10 @@ package GameObject;
  * @author STEVEN
  */
 public class BlueShoes extends Shoes {
+    
+    /**
+     * Konstruktor untuk BlueShoes yang menginisiasi nama object menjadi "Blue Shoes"
+     */
     public BlueShoes(){
         this.name="Blue Shoes";
     }

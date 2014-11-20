@@ -10,6 +10,9 @@ package GameObject;
  */
 public class Pool extends Traps{
 
+    /**
+     * Konstruktor untuk Pool yang menginisiasi nama object menjadi "Pool"
+     */
     public Pool(){
         this.name="Pool";
     }

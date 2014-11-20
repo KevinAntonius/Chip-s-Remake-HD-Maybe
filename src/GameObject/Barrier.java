@@ -10,6 +10,9 @@ package GameObject;
  */
 public class Barrier extends Wall{
 
+    /**
+     * Konstruktor Barrier yang menginisiasi nama object menjadi "Barrier"
+     */
     public Barrier(){
         this.name="Barrier";
     }

@@ -10,6 +10,10 @@ package GameObject;
  */
 public class IC extends GameObject{
     public static int totalChip=0;
+    
+    /**
+     * Konstruktor untuk IC yang menginisiasi nama object menjadi "IC"
+     */
     public IC(){
         this.name="IC";
         totalChip++;

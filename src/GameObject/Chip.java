@@ -21,6 +21,7 @@ public class Chip {
     private URL leftStandURL;
     private URL upStandURL;
     private URL rightStandURL;
+    private URL currentURL;
             
     public Chip(int x, int y){
         this.x=x;
@@ -55,8 +56,41 @@ public class Chip {
 //        else if(direction.equalsIgnoreCase("kanan")){
 //            this.y=y++;
 //        }
+        if(x>this.x){
+            this.currentURL=this.downStandURL;
+        }
+        else if(x<this.x){
+            this.currentURL=this.upStandURL;
+        }
+        else if(y>this.y){
+            this.currentURL=this.rightStandURL;
+        }
+        else if(y<this.y){
+            this.currentURL=this.leftStandURL;
+        }
+        
         this.x=x;
         this.y=y;
+    }
+    
+    public void moveUp(){
+        this.currentURL=this.upStandURL;
+        this.x--;
+    }
+    
+    public void moveDown(){
+        this.currentURL=this.downStandURL;
+        this.x++;
+    }
+    
+    public void moveLeft(){
+        this.currentURL=this.leftStandURL;
+        this.y--;
+    }
+    
+    public void moveRight(){
+        this.currentURL=this.sendRightStandURL();
+        this.y++;
     }
     public String getPath(){
         return this.imagePath;

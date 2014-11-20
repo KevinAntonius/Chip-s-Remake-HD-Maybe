@@ -7,18 +7,18 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Stack;
+import java.util.LinkedList;
 
 /**
  *
  * @author STEVEN
  */
 public class LevelIterator implements MapIterator{
-    protected Stack<File> fileStack;
+    protected LinkedList<File> fileList;
 	
 	public LevelIterator(String folder)
 	{
-		fileStack=new Stack<File>();
+		fileList=new LinkedList<File>();
 		readFolderContent(folder);
 	}
 	
@@ -28,13 +28,13 @@ public class LevelIterator implements MapIterator{
 		File[] folderContent=folderReader.listFiles();
 		for (int i=0;i<folderContent.length;i++)
 		{
-			fileStack.add(folderContent[i]);
+			fileList.add(folderContent[i]);
 		}
 	}
 
     @Override
     public Object next() {
-		if (fileStack.isEmpty())
+		if (fileList.isEmpty())
 		{
 			return null;
 		}
@@ -42,7 +42,7 @@ public class LevelIterator implements MapIterator{
 		{
 			do
 			{
-				File currentFile=fileStack.pop();
+				File currentFile=fileList.pop();
 				if (currentFile.isDirectory())
 				{
 					try
@@ -60,7 +60,7 @@ public class LevelIterator implements MapIterator{
 					return new Map(currentFile);
 				}
 				
-			} while (!fileStack.isEmpty());
+			} while (!fileList.isEmpty());
 			return null;
 		}			
 	}

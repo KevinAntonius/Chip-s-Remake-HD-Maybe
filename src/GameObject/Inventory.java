@@ -4,12 +4,19 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
  */
 public class Inventory {
     private Shoes[] shoes;
+    
+    /**
+     * Konstruktor untuk Inventory 
+     * @param manyShoes banyaknya Shoes yang dapat disimpan
+     */
     public Inventory(int manyShoes){
         shoes=new Shoes[manyShoes];
     }
@@ -31,6 +38,10 @@ public class Inventory {
         return false;
     }
     
+    /**
+     * Metod untuk menambah Shoes ke inventory
+     * @param newShoes Shoes yang ditambah ke inventory
+     */
     public void addShoes(Shoes newShoes){
         boolean terisi=false;
         for(int i=0;i<shoes.length&&!terisi;i++){
@@ -39,5 +50,22 @@ public class Inventory {
                 terisi=true;
             }
         }
+    }
+    
+    /**
+     * Metod untuk mengembalikan URL dari Shoes sesuai index
+     * @param index index Shoes
+     * @return mengembalikan URL Shoes, null jika tidak ada Shoe
+     */
+    public URL sendURLShoe(int index){
+        return this.shoes[index].sendURL();
+    }
+    
+    /**
+     * Metod untuk mengembalikan panjang array Shoes yang dimiliki inventory
+     * @return Panjang array Shoes yang dimiliki inventory
+     */
+    public int banyakShoes(){
+        return this.shoes.length;
     }
 }

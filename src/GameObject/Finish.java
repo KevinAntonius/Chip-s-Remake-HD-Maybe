@@ -9,6 +9,10 @@ package GameObject;
  * @author STEVEN
  */
 public class Finish extends GameObject{
+    
+    /**
+     * Konstruktor untuk Finish yang menginisiasi nama object menjadi "Finish"
+     */
     public Finish(){
      this.name="Finish";
     }

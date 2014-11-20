@@ -10,6 +10,9 @@ package GameObject;
  */
 public class FireFloor extends Traps{
 
+    /**
+     * Konstruktor untuk FireFloor yang menginisiasi nama object menjadi "Fire Floor"
+     */
     public FireFloor(){
         this.name="Fire Floor";
     }

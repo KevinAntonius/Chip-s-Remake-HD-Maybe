@@ -31,7 +31,7 @@ public class TextTester {
         c.implementsMapToWorld(c.start(path));
         int direction=0;
         
-        while(!c.getChip().getDead()){
+        while(!c.getChip().getDead()&&!c.getGameFinish()){
             
             for(int i=0;i<12;i++){
                 for(int j=0;j<12;j++){

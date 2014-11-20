@@ -10,6 +10,9 @@ package GameObject;
  */
 public class NormalWall extends Wall{
 
+    /**
+     * Konstruktor untuk NormalWall yang menginisiasi nama object menjadi "Wall"
+     */
     public NormalWall(){
      this.name="Wall";   
     }
