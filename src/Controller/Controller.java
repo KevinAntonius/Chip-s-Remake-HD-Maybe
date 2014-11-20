@@ -197,4 +197,12 @@ public class Controller {
     public URL sendURLAtObject(int x, int y){
         return this.world.sendURLAtObject(x, y);
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public World getWorld(){
+        return this.world;
+    }
 }
