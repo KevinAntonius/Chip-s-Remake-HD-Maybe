@@ -25,13 +25,13 @@ public class Controller implements KeyListener{
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
-        if(direction == 2){
+        if(direction == 8){
             x-=1; 
         }else if(direction == 4){
             y-=1;
         }else if(direction == 6){
             y+=1;
-        }else if(direction == 8){
+        }else if(direction == 2){
             x+=1;
         }
         if(!this.wallCheck(x,y)){
