@@ -19,6 +19,7 @@ public class Controller implements KeyListener{
     private GameObject object;
     private MapIterable maps;
     private boolean gameFinish;
+    private String path;
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
@@ -117,6 +118,7 @@ public class Controller implements KeyListener{
     }
     
     public Map start(String path){
+        this.path=path;
         maps=new Level(path);
         MapIterator mapi=maps.getIterator();
         return (Map)mapi.next();
@@ -167,6 +169,9 @@ public class Controller implements KeyListener{
                }
                else if(tempObject.equalsIgnoreCase("c")){
                    this.chip=new Chip(i,j);
+               }
+               else if(tempObject.equalsIgnoreCase("n")){
+                   go=new Floor();
                }
                this.world.setGameObjectAt(i, j, go);
                
@@ -245,5 +250,11 @@ public class Controller implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Map restart(){
+        maps=new Level(path);
+        MapIterator mapi=maps.newIterator();
+        return (Map)mapi.next();
     }
 }

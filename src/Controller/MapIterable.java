@@ -10,4 +10,5 @@ package Controller;
  */
 public interface MapIterable {
     public MapIterator getIterator();
+    public MapIterator newIterator();
 }

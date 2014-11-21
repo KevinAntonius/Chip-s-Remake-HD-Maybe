@@ -21,5 +21,11 @@ public class Level implements MapIterable{
     public MapIterator getIterator() {
         return itr;
     }
+
+    @Override
+    public MapIterator newIterator() {
+        itr=new LevelIterator(this.folder);
+        return itr;
+    }
     
 }
