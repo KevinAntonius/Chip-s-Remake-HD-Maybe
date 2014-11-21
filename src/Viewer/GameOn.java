@@ -17,11 +17,10 @@ public class GameOn {
         JFrame f = new JFrame("Chip's Challenge");
         Controller controller = new Controller();
         controller.implementsMapToWorld(controller.start("MapLevel"));
-        ChipsViewer chip = new ChipsViewer(controller);
+        //controller.implementChip();
         WorldViewer world = new WorldViewer(controller);
         f.getContentPane().add("Center",world);
-        f.getContentPane().add("Center",chip);
-        f.pack();
+        f.addKeyListener(controller);
         f.setSize(480,480);
         f.setLocation(0, 0);
         f.setVisible(true);

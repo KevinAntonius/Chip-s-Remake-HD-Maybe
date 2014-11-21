@@ -47,6 +47,8 @@ public class ChipsViewer extends JPanel{
     }
     
     public void moved(){
+        this.posisiX = this.controller.getChip().getX();
+        this.posisiY = this.controller.getChip().getY();
         repaint();
     }
 }
