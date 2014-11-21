@@ -37,7 +37,7 @@ public class World {
      * @return baris yang ada di array GameObject
      */
     public int getBaris(){
-        return this.object[0].length;
+        return this.object.length;
     }
     
     /**
@@ -45,7 +45,7 @@ public class World {
      * @return kolom yang ada di array GameObject
      */
     public int getKolom(){
-        return this.object.length;
+        return this.object[0].length;
     }
     
     /**

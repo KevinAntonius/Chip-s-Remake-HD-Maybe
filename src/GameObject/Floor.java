@@ -11,6 +11,6 @@ package GameObject;
 public class Floor extends GameObject{
     public Floor(){
        this.name="Floor";
-        url = getClass().getClassLoader().getResource("floor.jpg");
+        url = getClass().getClassLoader().getResource("Floor.jpg");
     }
 }

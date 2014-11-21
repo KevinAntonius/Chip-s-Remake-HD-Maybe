@@ -68,6 +68,9 @@ public class TextTester {
                             else if(go.getName().equalsIgnoreCase("Finish")){
                                 System.out.print("s ");
                             }
+                            else if(go.getName().equalsIgnoreCase("Floor")){
+                                System.out.print("  ");
+                            }
                         }
                    }
                 }

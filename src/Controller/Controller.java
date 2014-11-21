@@ -168,6 +168,7 @@ public class Controller implements KeyListener{
                    go=new Finish();
                }
                else if(tempObject.equalsIgnoreCase("c")){
+                   go=new Floor();
                    this.chip=new Chip(i,j);
                }
                else if(tempObject.equalsIgnoreCase("n")){

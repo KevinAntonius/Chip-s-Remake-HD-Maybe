@@ -20,8 +20,7 @@ public class GameOn {
         ChipsViewer chip = new ChipsViewer(controller);
         WorldViewer world = new WorldViewer(controller);
         f.getContentPane().add("Center",world);
-        f.getContentPane().add("Center",chip);
-        f.pack();
+        //f.getContentPane().add("Center",chip);
         f.setSize(480,480);
         f.setLocation(0, 0);
         f.setVisible(true);
