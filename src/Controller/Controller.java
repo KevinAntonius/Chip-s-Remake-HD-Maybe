@@ -21,7 +21,10 @@ public class Controller implements KeyListener{
     private MapIterable maps;
     private boolean gameFinish;
     private String path;
+<<<<<<< HEAD
     private ChipsViewer chips;
+=======
+>>>>>>> origin/master
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
@@ -258,6 +261,12 @@ public class Controller implements KeyListener{
     
     public void implementChip(){
         this.chips = new ChipsViewer(this);
+    }
+    
+    public Map restart(){
+        maps=new Level(path);
+        MapIterator mapi=maps.newIterator();
+        return (Map)mapi.next();
     }
     
     public Map restart(){
