@@ -18,8 +18,8 @@ public class GameOn {
         Controller controller = new Controller();
         controller.implementsMapToWorld(controller.start("MapLevel"));
         ChipsViewer chip = new ChipsViewer(controller);
-        //WorldViewer world = new WorldViewer(controller);
-        //f.getContentPane().add("Center",world);
+        WorldViewer world = new WorldViewer(controller);
+        f.getContentPane().add("Center",world);
         f.getContentPane().add("Center",chip);
         f.pack();
         f.setSize(480,480);

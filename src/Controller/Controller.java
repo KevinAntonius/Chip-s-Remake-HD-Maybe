@@ -5,13 +5,15 @@
 package Controller;
 
 import GameObject.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 
 /**
  *
  * @author STEVEN
  */
-public class Controller {
+public class Controller implements KeyListener{
     private Chip chip;
     private World world; 
     private GameObject object;
@@ -21,13 +23,13 @@ public class Controller {
         int x=chip.getX();
         int y=chip.getY();
         if(direction == 2){
-            x+=1; 
+            x-=1; 
         }else if(direction == 4){
             y-=1;
         }else if(direction == 6){
             y+=1;
         }else if(direction == 8){
-            x-=1;
+            x+=1;
         }
        if(!this.wallCheck(x,y)){
             if(direction == 2){
@@ -215,5 +217,33 @@ public class Controller {
      */
     public World getWorld(){
         return this.world;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int direction = -1;
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            direction = 2;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            direction = 4;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            direction = 6;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            direction = 8;
+        }
+        this.chipMove(direction);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

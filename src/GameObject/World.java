@@ -84,6 +84,10 @@ public class World {
      * @return URL pada GameObject di baris-x dan kolom-y
      */
     public URL sendURLAtObject(int x, int y){
-        return this.object[x][y].sendURL();
+        URL url= this.object[x][y].sendURL();
+        if(url==null){
+            url = getClass().getClassLoader().getResource("floor.jpg");
+        }
+        return url;
     }
 }
