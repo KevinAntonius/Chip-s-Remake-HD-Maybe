@@ -24,8 +24,8 @@ public class Chip {
     private URL currentURL;
             
     public Chip(int x, int y){
-        this.x=x;
-        this.y=y;
+        this.x=y;
+        this.y=x;
         this.death=false;
         this.downStandURL = getClass().getClassLoader().getResource("downStand.jpg");
         this.leftStandURL = getClass().getClassLoader().getResource("leftStand.jpg");

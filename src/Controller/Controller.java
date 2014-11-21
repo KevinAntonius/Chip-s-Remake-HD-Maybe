@@ -5,7 +5,7 @@
 package Controller;
 
 import GameObject.*;
-import Viewer.ChipsViewer;
+import Viewer.WorldViewer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
@@ -21,10 +21,7 @@ public class Controller implements KeyListener{
     private MapIterable maps;
     private boolean gameFinish;
     private String path;
-<<<<<<< HEAD
-    private ChipsViewer chips;
-=======
->>>>>>> origin/master
+    private WorldViewer chips;
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
@@ -138,7 +135,6 @@ public class Controller implements KeyListener{
        String []split=str.split("\n");
        this.world=new World((Integer.parseInt(split[0])),(Integer.parseInt(split[1])));
        for(int i=0;i<this.world.getKolom();i++){
-           int x=i;
            for(int j=0;j<this.world.getBaris();j++){
                GameObject go=null;
                String tempObject="";
@@ -257,16 +253,6 @@ public class Controller implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         
-    }
-    
-    public void implementChip(){
-        this.chips = new ChipsViewer(this);
-    }
-    
-    public Map restart(){
-        maps=new Level(path);
-        MapIterator mapi=maps.newIterator();
-        return (Map)mapi.next();
     }
     
     public Map restart(){

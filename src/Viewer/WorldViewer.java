@@ -23,6 +23,9 @@ public class WorldViewer extends JPanel{
     
     private Controller controller;
     private Image[][] img;
+    private Image imgChips;
+    private int posisiX;
+    private int posisiY;
     private URL currentURL;
     
     public WorldViewer(Controller controller) throws IOException{
@@ -42,6 +45,9 @@ public class WorldViewer extends JPanel{
                 }
             }
         }
+        this.imgChips = ImageIO.read(this.controller.getChip().sendDownStandURL());
+        this.posisiX = this.controller.getChip().getX();
+        this.posisiY = this.controller.getChip().getY();
     }
     
     public void clear(Graphics g){
@@ -60,5 +66,12 @@ public class WorldViewer extends JPanel{
                 }
             }
         }
+        g.drawImage(imgChips, (this.posisiX)*40, this.posisiY*40, this);
+    }
+    
+    public void moved(){
+        this.posisiX = this.controller.getChip().getX();
+        this.posisiY = this.controller.getChip().getY();
+        repaint();
     }
 }
