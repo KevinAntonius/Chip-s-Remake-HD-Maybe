@@ -15,5 +15,7 @@ public class Finish extends GameObject{
      */
     public Finish(){
      this.name="Finish";
+     this.url=getClass().getClassLoader().getResource("Finish.jpg");
+        
     }
 }

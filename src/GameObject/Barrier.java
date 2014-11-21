@@ -15,6 +15,7 @@ public class Barrier extends Wall{
      */
     public Barrier(){
         this.name="Barrier";
+        url = getClass().getClassLoader().getResource("Barrier.jpg");
     }
     
     /**

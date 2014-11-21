@@ -5,6 +5,7 @@
 package Controller;
 
 import GameObject.*;
+import Viewer.ChipsViewer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
@@ -19,6 +20,8 @@ public class Controller implements KeyListener{
     private GameObject object;
     private MapIterable maps;
     private boolean gameFinish;
+    private String path;
+    private ChipsViewer chips;
     public void chipMove(int direction){
         int x=chip.getX();
         int y=chip.getY();
@@ -117,6 +120,7 @@ public class Controller implements KeyListener{
     }
     
     public Map start(String path){
+        this.path=path;
         maps=new Level(path);
         MapIterator mapi=maps.getIterator();
         return (Map)mapi.next();
@@ -166,7 +170,11 @@ public class Controller implements KeyListener{
                    go=new Finish();
                }
                else if(tempObject.equalsIgnoreCase("c")){
+                   go=new Floor();
                    this.chip=new Chip(i,j);
+               }
+               else if(tempObject.equalsIgnoreCase("n")){
+                   go=new Floor();
                }
                this.world.setGameObjectAt(i, j, go);
                
@@ -221,7 +229,7 @@ public class Controller implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
@@ -240,10 +248,21 @@ public class Controller implements KeyListener{
             direction = 8;
         }
         this.chipMove(direction);
+        this.chips.moved();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+    
+    public void implementChip(){
+        this.chips = new ChipsViewer(this);
+    }
+    
+    public Map restart(){
+        maps=new Level(path);
+        MapIterator mapi=maps.newIterator();
+        return (Map)mapi.next();
     }
 }

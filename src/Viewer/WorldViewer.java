@@ -30,12 +30,15 @@ public class WorldViewer extends JPanel{
         this.currentURL = null;
         Object nullExam = null;
         this.img = new Image[this.controller.getWorld().getKolom()][this.controller.getWorld().getBaris()];
-        for(int i = 0;i<this.controller.getWorld().getBaris();i++){
-            for(int j = 0;j<this.controller.getWorld().getKolom();j++){
+        for(int i = 0;i<this.controller.getWorld().getKolom();i++){
+            for(int j = 0;j<this.controller.getWorld().getBaris();j++){
                 nullExam = this.controller.getGameObjectAt(i, j);
                 if(nullExam!=null){
-                    this.currentURL = this.controller.sendURLAtObject(j, j);
-                    this.img[i][j] = ImageIO.read(currentURL);
+                    this.currentURL = this.controller.sendURLAtObject(i, j);
+                    if(currentURL==null){
+                        System.out.println(i+" dan "+j);
+                    }
+                    this.img[j][i] = ImageIO.read(currentURL);
                 }
             }
         }
