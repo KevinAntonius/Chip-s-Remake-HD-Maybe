@@ -34,7 +34,7 @@ public class Controller implements KeyListener{
         }else if(direction == 8){
             x+=1;
         }
-       if(!this.wallCheck(x,y)){
+        if(!this.wallCheck(x,y)){
             if(direction == 2){
                 chip.moveDown();
             }else if(direction == 4){
@@ -44,6 +44,9 @@ public class Controller implements KeyListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
+            System.out.println(this.chip.getX()+" "+this.chip.getY());
+            System.out.println(this.getGameObjectAt(this.chip.getX(), this.chip.getY()).getName());
+       
            //chip.move(x,y);
            this.deathCheck();
            this.itemCheck();
@@ -235,7 +238,7 @@ public class Controller implements KeyListener{
     public void keyPressed(KeyEvent e) {
         int direction = -1;
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            direction = 2;
+            direction = 8;
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
             direction = 4;
@@ -244,7 +247,7 @@ public class Controller implements KeyListener{
             direction = 6;
         }
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            direction = 8;
+            direction = 2;
         }
         this.chipMove(direction);
         this.chips.moved();
@@ -259,5 +262,9 @@ public class Controller implements KeyListener{
         maps=new Level(path);
         MapIterator mapi=maps.newIterator();
         return (Map)mapi.next();
+    }
+    
+    public void implementsWorldViewer(WorldViewer worldV){
+        this.chips = worldV;
     }
 }

@@ -18,6 +18,7 @@ public class GameOn {
         Controller controller = new Controller();
         controller.implementsMapToWorld(controller.start("MapLevel"));
         WorldViewer world = new WorldViewer(controller);
+        controller.implementsWorldViewer(world);
         f.getContentPane().add("Center",world);
         f.addKeyListener(controller);
         f.setSize(480,480);

@@ -64,7 +64,7 @@ public class World {
      * @param y kolom
      */
     public void destroyObjectAt(int x, int y){
-        object[x][y]=null;
+        object[x][y]=new Floor();
     }
     
     /**

@@ -38,16 +38,13 @@ public class WorldViewer extends JPanel{
                 nullExam = this.controller.getGameObjectAt(i, j);
                 if(nullExam!=null){
                     this.currentURL = this.controller.sendURLAtObject(i, j);
-                    if(currentURL==null){
-                        System.out.println(i+" dan "+j);
-                    }
                     this.img[j][i] = ImageIO.read(currentURL);
                 }
             }
         }
         this.imgChips = ImageIO.read(this.controller.getChip().sendDownStandURL());
-        this.posisiX = this.controller.getChip().getX();
-        this.posisiY = this.controller.getChip().getY();
+        this.posisiY = this.controller.getChip().getX();
+        this.posisiX = this.controller.getChip().getY();
     }
     
     public void clear(Graphics g){
@@ -66,12 +63,12 @@ public class WorldViewer extends JPanel{
                 }
             }
         }
-        g.drawImage(imgChips, (this.posisiX)*40, this.posisiY*40, this);
+        g.drawImage(imgChips, this.posisiX*40, this.posisiY*40, this);
     }
     
     public void moved(){
-        this.posisiX = this.controller.getChip().getX();
-        this.posisiY = this.controller.getChip().getY();
+        this.posisiY = this.controller.getChip().getX();
+        this.posisiX = this.controller.getChip().getY();
         repaint();
     }
 }
