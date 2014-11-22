@@ -330,6 +330,8 @@ public class Controller implements KeyListener{
             }
             else if(tempKode.equalsIgnoreCase("i")){
                 temp=new IC();
+                IC ic=(IC)temp;
+                ic.getIC();
             }
             else if(tempKode.equalsIgnoreCase("p")){
                 temp=new Pool();
@@ -353,5 +355,9 @@ public class Controller implements KeyListener{
             result[i]=gos[i].sendURL();
         }
         return result;
+    }
+    
+    public String getKodeMapAt(int x, int y){
+        return this.world.getKodeMapAt(x, y);
     }
 }

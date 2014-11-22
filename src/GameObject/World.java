@@ -69,6 +69,10 @@ public class World {
         return this.mapKode;
     }
     
+    public String getKodeMapAt(int x, int y){
+        return this.mapKode[x][y];
+    }
+    
     /**
      * metod untuk menghilangkan GameObject di baris-x dan kolom-y 
      * @param x baris

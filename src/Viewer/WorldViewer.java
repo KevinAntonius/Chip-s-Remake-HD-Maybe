@@ -16,68 +16,74 @@ import javax.swing.JPanel;
  *
  * @author Kevin
  */
-public class WorldViewer extends JPanel{
-    
+public class WorldViewer extends JPanel {
+
     private final static int CANVAS_WIDTH = 600;
     private final static int CANVAS_HEIGHT = 600;
-    
     private Controller controller;
-    private Image[][] img;
+    private String[] kodeMap;
+    private String[][] mapPattern;
+    private Image[] img;
     private Image imgChips;
     private int posisiX;
     private int posisiY;
     private URL currentURL;
-    
-    public WorldViewer(Controller controller) throws IOException{
-        this.controller =controller;
+
+    public WorldViewer(Controller controller) throws IOException {
+        this.controller = controller;
         this.currentURL = null;
+        this.setImage();
         this.fillContent();
     }
-    
-    public void clear(Graphics g){
+
+    public void clear(Graphics g) {
         super.paintComponent(g);
     }
-    
+
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         this.clear(g);
         Image currentImg = null;
-        for(int i = 0;i<this.img.length;i++){
-            for(int j = 0;j<this.img[i].length;j++){
-                currentImg = this.img[i][j];
-                if(currentImg != null){
-                    g.drawImage(currentImg, i*40, j*40, null);
+        for (int i = 0; i < this.mapPattern.length; i++) {
+            for (int j = 0; j < this.mapPattern[i].length; j++) {
+                int index = 0;
+                while (!this.mapPattern[i][j].equals(this.kodeMap[index])) {
+                    index++;
                 }
+                g.drawImage(img[index], j*40, i*40, this);
             }
         }
-        g.drawImage(imgChips, this.posisiX*40, this.posisiY*40, this);
+        g.drawImage(imgChips, this.posisiX * 40, this.posisiY * 40, this);
     }
-    
-    public void moved(){
+
+    public void moved() {
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
         repaint();
     }
-    
-    public void fillContent() throws IOException{
-        Object nullExam = null;
-        this.img = new Image[this.controller.getWorld().getKolom()][this.controller.getWorld().getBaris()];
-        for(int i = 0;i<this.controller.getWorld().getKolom();i++){
-            for(int j = 0;j<this.controller.getWorld().getBaris();j++){
-                nullExam = this.controller.getGameObjectAt(i, j);
-                if(nullExam!=null){
-                    this.currentURL = this.controller.sendURLAtObject(i, j);
-                    this.img[j][i] = ImageIO.read(currentURL);
-                }
-            }
-        }
-        this.imgChips = ImageIO.read(this.controller.sendURLChip());
+
+    public void fillContent() throws IOException {
+        this.mapPattern = this.controller.getWorld().getIsiMap();
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
     }
-    
-    public void afterTaken(int x, int y) throws IOException{
-        this.img[y][x] = ImageIO.read(this.controller.getGameObjectAt(x, y).sendURL());
+
+    public void afterTaken(int x, int y) throws IOException {
+        //this.img[y][x] = ImageIO.read(this.controller.getGameObjectAt(x, y).sendURL());
+        this.mapPattern[x][y]=this.controller.getKodeMapAt(x, y);
         repaint();
+    }
+
+    public void setImage() throws IOException {
+        String codeTemp = this.controller.kodeTipeGameObjekDiMapSekarang();
+        URL[] urlTemp = this.controller.tipeGameObjectDiMapSekarang(codeTemp);
+        this.kodeMap = new String[codeTemp.length()];
+        this.img=new Image[kodeMap.length];
+        for (int i = 0; i < codeTemp.length(); i++) {
+            this.kodeMap[i] = codeTemp.substring(i, i + 1);
+            URL temp = urlTemp[i];
+            this.img[i] = ImageIO.read(temp);
+        }
+        this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
     }
 }
