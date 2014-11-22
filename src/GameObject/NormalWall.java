@@ -31,6 +31,6 @@ public class NormalWall extends Wall{
     @Override
     public URL sendURL(){
         return getClass().getClassLoader().getResource("wall.jpg");
-    }
+        }
     
 }

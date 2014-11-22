@@ -13,6 +13,7 @@ import java.net.URL;
  */
 public abstract class GameObject {
     protected String name;
+    protected URL url;
     public String getPath(){
         return this.name;
     }
@@ -22,7 +23,5 @@ public abstract class GameObject {
     }
     
     
-    public URL sendURL(){
-        return null;
-    }
+    public abstract URL sendURL();
 }
