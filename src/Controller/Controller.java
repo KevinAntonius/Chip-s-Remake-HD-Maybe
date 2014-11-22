@@ -323,7 +323,7 @@ public class Controller implements KeyListener{
         return exist;
     }
     
-    public GameObject[] tipeGameObjectDiMapSekarang(){
+    public URL[] tipeGameObjectDiMapSekarang(){
         String str=this.kodeTipeGameObjekDiMapSekarang();
         GameObject[] gos=new GameObject[str.length()];
         GameObject temp;
@@ -359,6 +359,10 @@ public class Controller implements KeyListener{
             }
             gos[i]=temp;
         }
-        return gos;
+        URL []result=new URL[gos.length];
+        for(int i=0;i<result.length;i++){
+            result[i]=gos[i].sendURL();
+        }
+        return result;
     }
 }
