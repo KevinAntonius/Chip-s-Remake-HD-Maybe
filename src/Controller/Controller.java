@@ -24,6 +24,7 @@ public class Controller implements KeyListener{
     private boolean gameFinish;
     private String path;
     private WorldViewer chips;
+    private String isiMap;
     public void chipMove(int direction) throws IOException{
         int x=chip.getX();
         int y=chip.getY();
@@ -80,10 +81,10 @@ public class Controller implements KeyListener{
     }
     
     private boolean deathCheck(){
-        GameObject kevin =  world.getObjectAt(chip.getX(), chip.getY());
-        if(kevin!=null){
-             if(kevin.getName().equalsIgnoreCase("Fire Floor")||kevin.getName().equalsIgnoreCase("Pool")){
-                Traps trap=(Traps) kevin;
+        GameObject go =  world.getObjectAt(chip.getX(), chip.getY());
+        if(go!=null){
+             if(go.getName().equalsIgnoreCase("Fire Floor")||go.getName().equalsIgnoreCase("Pool")){
+                Traps trap=(Traps) go;
                 if(!chip.shoesCheck(trap.getRequirementShoes())){
                 chip.isDead();
                 }  
@@ -93,17 +94,16 @@ public class Controller implements KeyListener{
             return false;
     }
     private void itemCheck(){
-        GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
-        if(steven!=null){
-            if(steven.getName().equalsIgnoreCase("Blue Shoes")){
-                this.chip.getShoes((Shoes)steven);
+        GameObject go = world.getObjectAt(chip.getX(),chip.getY());
+        if(go!=null){
+            if(go.getName().equalsIgnoreCase("Blue Shoes")){
+                this.chip.getShoes((Shoes)go);
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
-            }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
-                this.chip.getShoes((Shoes)steven);
+            }else if(go.getName().equalsIgnoreCase("Red Shoes")){
+                this.chip.getShoes((Shoes)go);
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
-            }else if(steven.getName().equalsIgnoreCase("IC")){
-                //pikirin lagi
-                IC ic=(IC)steven;
+            }else if(go.getName().equalsIgnoreCase("IC")){
+                IC ic=(IC)go;
                 ic.getIC();
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
             }
@@ -111,9 +111,9 @@ public class Controller implements KeyListener{
     }
     
     private boolean finishCheck(){
-        GameObject evan = world.getObjectAt(chip.getX(),chip.getY());
-        if(evan!=null){
-            if(evan.getName().equalsIgnoreCase("Finish")){
+        GameObject go = world.getObjectAt(chip.getX(),chip.getY());
+        if(go!=null){
+            if(go.getName().equalsIgnoreCase("Finish")){
                 return true;
             }
         }
@@ -139,6 +139,7 @@ public class Controller implements KeyListener{
     
    public void implementsMapToWorld(Map newMap){
        String str=newMap.getIsiMap();
+       this.isiMap=str.substring(6);
        String []split=str.split("\n");
        this.world=new World((Integer.parseInt(split[0])),(Integer.parseInt(split[1])));
        for(int i=0;i<this.world.getKolom();i++){
@@ -275,4 +276,19 @@ public class Controller implements KeyListener{
     public void implementsWorldViewer(WorldViewer worldV){
         this.chips = worldV;
     }
+    
+    public String[][] getIsiMap(){
+        String [][] arrayMap=new String[this.world.getBaris()][this.world.getKolom()];
+        String []splitBaris=this.isiMap.split("\n");
+        String []splitKolom;
+        for(int i=0;i<splitBaris.length;i++){
+            splitKolom=splitBaris[i].split(" ");
+            arrayMap[i]=splitKolom;
+        }
+        return arrayMap;
+    }
+    
+//    public int banyakObjekDiMapSekarang(){
+//        
+//    }
 }

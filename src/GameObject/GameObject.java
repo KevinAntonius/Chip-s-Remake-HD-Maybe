@@ -12,15 +12,10 @@ import java.net.URL;
  * @author STEVEN
  */
 public abstract class GameObject {
-    protected String path;
     protected String name;
     protected URL url;
     public String getPath(){
         return this.name;
-    }
-    
-    public void setPath(String newPath){
-        this.path=newPath;
     }
     
     public String getName(){
