@@ -21,9 +21,13 @@ public class IC extends GameObject{
         totalChip++;
     }
     
+    /**
+     * Metod untuk mengurangi IC yang harus diambil
+     */
     public void getIC(){
         totalChip--;
     }
+    
     @Override
     public URL sendURL(){
         return getClass().getClassLoader().getResource("integratedCircuit.jpg");

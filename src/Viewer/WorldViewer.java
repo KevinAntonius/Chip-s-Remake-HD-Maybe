@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -59,6 +61,12 @@ public class WorldViewer extends JPanel {
     public void moved() {
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
+        try {
+            //coba diskusiin
+            this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
+        } catch (IOException ex) {
+            Logger.getLogger(WorldViewer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         repaint();
     }
 
@@ -69,7 +77,6 @@ public class WorldViewer extends JPanel {
     }
 
     public void afterTaken(int x, int y) throws IOException {
-        //this.img[y][x] = ImageIO.read(this.controller.getGameObjectAt(x, y).sendURL());
         this.mapPattern[x][y]=this.controller.getKodeMapAt(x, y);
         repaint();
     }

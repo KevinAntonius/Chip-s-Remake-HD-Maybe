@@ -34,10 +34,6 @@ public class World {
         return this.object[x][y];
     }
     
-    public String getKodeAt(int x,int y){
-        return this.mapKode[x][y];
-    }
-    
     /**
      * Metod untuk mendapatkan baris yang ada di array GameObject
      * @return baris yang ada di array GameObject
@@ -65,10 +61,20 @@ public class World {
         this.mapKode[x][y]=kode;
     }
     
+    /**
+     * Metod untuk mengembalikan isi kode map
+     * @return isi kode map
+     */
     public String[][] getIsiMap(){
         return this.mapKode;
     }
     
+    /**
+     * Metod untuk mengambil kode map di baris x dan kolom y
+     * @param x baris
+     * @param y kolom
+     * @return kode map di baris x dan kolom y
+     */
     public String getKodeMapAt(int x, int y){
         return this.mapKode[x][y];
     }

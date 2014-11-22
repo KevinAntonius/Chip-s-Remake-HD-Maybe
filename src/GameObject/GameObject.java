@@ -14,14 +14,18 @@ import java.net.URL;
 public abstract class GameObject {
     protected String name;
     protected URL url;
-    public String getPath(){
-        return this.name;
-    }
     
+    /**
+     * Metod untuk mengembalikan nama dari GameObject ini
+     * @return 
+     */
     public String getName(){
         return this.name;
     }
     
-    
+    /**
+     * Metod untuk mengembalikan URL yang diperlukan untuk merepresentasikan GameObjek ini. Sementara bersifat abstract sehingga harus di Override.
+     * @return URL untuk merepresentasikan GameObjek ini.
+     */
     public abstract URL sendURL();
 }

@@ -101,7 +101,7 @@ public class Controller implements KeyListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
-           if(this.deathCheck(direction)){
+           if(this.deathCheck()){
            }
            this.itemCheck();
            
@@ -135,7 +135,7 @@ public class Controller implements KeyListener{
      * Metod untuk mengecek apakah chip meninggal atau tidak. jika Chip berada di trap FireFloor atau pool tanpa memiliki sepatu yang diperlukan, maka Chip di set meninggal. Tidak jika sebaliknya.
      * @return true jika chip meninggal. Tidak jika chip memang tidak meninggal atau letak chip sekarang bukan trap.
      */
-    private boolean deathCheck(int direction){
+    private boolean deathCheck(){
         GameObject go =  world.getObjectAt(chip.getX(), chip.getY());
         boolean isDead=false;
         if(go!=null){

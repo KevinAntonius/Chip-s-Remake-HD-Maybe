@@ -13,7 +13,6 @@ import java.net.URL;
  */
 public class Chip {
     private Inventory inventory=new Inventory(2);
-    private String imagePath;
     private boolean death;
     private int x;
     private int y;
@@ -22,7 +21,12 @@ public class Chip {
     private URL upStandURL;
     private URL rightStandURL;
     private URL currentURL;
-            
+    
+    /**
+     * Konstruktor Untuk menginisialisasi baris dan kolom yang ada di Chip. Selain itu, isinya juga mengeinisialisasi URL yang diperlukan
+     * @param x baris
+     * @param y kolom
+     */
     public Chip(int x, int y){
         this.x=x;
         this.y=y;
@@ -34,40 +38,58 @@ public class Chip {
         this.currentURL=downStandURL;
     }
     
+    /**
+     * Metod untuk mengurangi baris yang ditempati chip dan menginisialisasi currentURL menjadi upStandURL
+     */
     public void moveUp(){
         this.currentURL=this.upStandURL;
         this.x--;
     }
     
+    /**
+     * Metod untuk mengurangi baris yang ditempati chip dan menginisialisasi currentURL menjadi downStandURL
+     */
     public void moveDown(){
         this.currentURL=this.downStandURL;
         this.x++;
     }
     
+    /**
+     * Metod untuk mengurangi baris yang ditempati chip dan menginisialisasi currentURL menjadi leftStandURL
+     */
     public void moveLeft(){
         this.currentURL=this.leftStandURL;
         this.y--;
     }
     
+    /**
+     * Metod untuk mengurangi baris yang ditempati chip dan menginisialisasi currentURL menjadi rightStandURL
+     */
     public void moveRight(){
         this.currentURL=this.rightStandURL;
         this.y++;
     }
-    public String getPath(){
-        return this.imagePath;
-    }
-    public void setPath(String newPath){
-        this.imagePath=newPath;
-    }
     
+    /**
+     * Mengembalikan posisi baris dari Chip
+     * @return posisi baris dari Chip
+     */
     public int getX(){
         return this.x;
     }
     
+    /**
+     * Mengembalikan posisi kolom dari Chip
+     * @return posisi kolom dari Chip
+     */
     public int getY(){
         return this.y;
     }
     
+    /**
+     * Mengembalikan status kematian dari Chip
+     * @return true jika meninggal, false jika masih hidup.
+     */
     public boolean getDead(){
         return this.death;
     }
@@ -79,17 +101,60 @@ public class Chip {
         this.death=true;
     }
     
+    /**
+     * Metod untuk mendapatkan shoes sesuai di parameter
+     * @param shoe 
+     */
     public void getShoes(Shoes shoe){
         if(shoe!=null){
             this.inventory.addShoes(shoe);
         }
     }
     
+    /**
+     * Metod untuk mengecheck apakah ada tipe Shoes yang sesuai dengan parameter
+     * @param requirementShoes shoes yang diperlukan
+     * @return true jika ada, false jika tidak
+     */
     public boolean shoesCheck(Shoes requirementShoes){
         return this.inventory.checkIsThere(requirementShoes);
     }
     
+    /**
+     * Metod untuk mengembalikan currentURL
+     * @return currentURL
+     */
     public URL sendCurrentURL(){
         return this.currentURL;
     }
+    
+    /**
+     * Mengubah URL di chip menjadi berdiri diatas lava
+     */
+    public void setToLavaWalker(){
+        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnLava.jpg");
+        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnLava.jpg");
+        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnLava.jpg");
+        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnLava.jpg");
+    }
+    
+    /**
+     * Mengubah URL di chip menjadi berdiri diatas air
+     */
+    public void setToWaterWalker(){
+        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnWaterTrap.jpg");
+        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnWaterTrap.jpg");
+        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnWaterTrap.jpg");
+        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnWaterTrap.jpg");
+    }
+    
+    /**
+     * Mengubah URL di chip menjadi berdiri diatas lantai
+     */
+    public void setToNormalWalker(){
+        this.downStandURL = getClass().getClassLoader().getResource("downStand.png");
+        this.leftStandURL = getClass().getClassLoader().getResource("leftStand.png");
+        this.rightStandURL = getClass().getClassLoader().getResource("rightStand.png");
+        this.upStandURL = getClass().getClassLoader().getResource("upStand.png");
+   }
 }
