@@ -4,6 +4,8 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -15,7 +17,6 @@ public class NormalWall extends Wall{
      */
     public NormalWall(){
      this.name="Wall";   
-        this.url=getClass().getClassLoader().getResource("wall.jpg");
     }
     
     /**
@@ -25,6 +26,11 @@ public class NormalWall extends Wall{
     @Override
     public boolean tryOpen() {
         return false;
+    }
+    
+    @Override
+    public URL sendURL(){
+        return getClass().getClassLoader().getResource("wall.jpg");
     }
     
 }

@@ -4,6 +4,8 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -16,11 +18,14 @@ public class IC extends GameObject{
      */
     public IC(){
         this.name="IC";
-        this.url=getClass().getClassLoader().getResource("integratedCircuit.jpg");
         totalChip++;
     }
     
     public void getIC(){
         totalChip--;
+    }
+    @Override
+    public URL sendURL(){
+        return getClass().getClassLoader().getResource("integratedCircuit.jpg");
     }
 }

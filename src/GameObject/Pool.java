@@ -4,6 +4,8 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -15,7 +17,6 @@ public class Pool extends Traps{
      */
     public Pool(){
         this.name="Pool";
-        this.url=getClass().getClassLoader().getResource("waterTrap.jpg");
     }
     
     /**
@@ -27,4 +28,8 @@ public class Pool extends Traps{
         return new BlueShoes();
     }
     
+    @Override
+    public URL sendURL(){
+        return getClass().getClassLoader().getResource("waterTrap.jpg");
+    }
 }

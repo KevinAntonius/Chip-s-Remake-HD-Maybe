@@ -12,6 +12,7 @@ import java.net.URL;
  */
 public class World {
     private GameObject[][] object;
+    private String[][] mapKode;
     
     /**
      * Konstruktor World yang menerima parameter banyak baris dan kolom untuk GameObject di World
@@ -20,6 +21,7 @@ public class World {
      */
     public World(int x, int y){
         this.object=new GameObject[x][y];
+        this.mapKode=new String[x][y];
     }
     
     /**
@@ -30,6 +32,10 @@ public class World {
      */
     public GameObject getObjectAt(int x,int y){
         return this.object[x][y];
+    }
+    
+    public String getKodeAt(int x,int y){
+        return this.mapKode[x][y];
     }
     
     /**
@@ -54,8 +60,13 @@ public class World {
      * @param y kolom
      * @param newGO GameObject yang akan di set ke World
      */
-    public void setGameObjectAt(int x, int y, GameObject newGO){
+    public void setGameObjectAt(int x, int y, GameObject newGO, String kode){
         object[x][y]=newGO;
+        this.mapKode[x][y]=kode;
+    }
+    
+    public String[][] getIsiMap(){
+        return this.mapKode;
     }
     
     /**
@@ -65,17 +76,9 @@ public class World {
      */
     public void destroyObjectAt(int x, int y){
         object[x][y]=new Floor();
+        this.mapKode[x][y]="n";
     }
     
-    /**
-     * Metod untuk mengeset URL pada GameObject di baris-x dan kolom-y
-     * @param x baris
-     * @param y kolom 
-     * @param URL URL baru
-     */
-    public void setURLAtObject(int x, int y, String URL){
-        this.object[x][y].setURL(URL);
-    }
     
     /**
      * Metod untuk mendapatkan URL pada GameObject di baris-x dan kolom-y

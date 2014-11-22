@@ -47,8 +47,8 @@ public class Controller implements KeyListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
-            System.out.println(this.chip.getX()+" "+this.chip.getY());
-            System.out.println(this.getGameObjectAt(this.chip.getX(), this.chip.getY()).getName());
+            //System.out.println(this.chip.getX()+" "+this.chip.getY());
+            //System.out.println(this.getGameObjectAt(this.chip.getX(), this.chip.getY()).getName());
        
            //chip.move(x,y);
            this.deathCheck();
@@ -70,6 +70,7 @@ public class Controller implements KeyListener{
            if(this.tryOpenWallOrBarrier(x, y)){
                this.world.destroyObjectAt(x, y);
                this.chips.afterTaken(x,y);
+               
            }
        }
     }
@@ -188,7 +189,10 @@ public class Controller implements KeyListener{
                else if(tempObject.equalsIgnoreCase("n")){
                    go=new Floor();
                }
-               this.world.setGameObjectAt(i, j, go);
+               if(tempObject.equalsIgnoreCase("c")){
+                   tempObject="n";
+               }
+               this.world.setGameObjectAt(i, j, go,tempObject);
                
            }
        }
@@ -203,17 +207,8 @@ public class Controller implements KeyListener{
    }
    
    public URL sendURLChip(){
-       return this.chip.sendDownStandURL();
+       return this.chip.sendCurrentURL();
    }
-   /**
-     * Metod untuk mengeset URL pada GameObject di baris-x dan kolom-y
-     * @param x baris
-     * @param y kolom 
-     * @param URL URL baru
-     */
-    public void setURLAtObject(int x, int y,String URL){
-        this.world.setURLAtObject(x, y, URL);
-    }
     
     
     /**
@@ -282,20 +277,9 @@ public class Controller implements KeyListener{
         this.chips = worldV;
     }
     
-    public String[][] getIsiMap(){
-        String [][] arrayMap=new String[this.world.getBaris()][this.world.getKolom()];
-        String []splitBaris=this.isiMap.split("\n");
-        for(int i=0;i<splitBaris.length;i++){
-            for(int j=0;j<splitBaris[i].length();j++){
-                arrayMap[i][j]=splitBaris[i].substring(j, j+1);
-            }
-        }
-        return arrayMap;
-    }
-    
     public String kodeTipeGameObjekDiMapSekarang(){
         String str="";
-        String[][] arrayMap=this.getIsiMap();
+        String[][] arrayMap=this.world.getIsiMap();
         for(int i=0;i<arrayMap.length;i++){
             for(int j=0;j<arrayMap[i].length;j++){
                 if(str.equalsIgnoreCase("")){
@@ -323,7 +307,12 @@ public class Controller implements KeyListener{
         return exist;
     }
     
-    public URL[] tipeGameObjectDiMapSekarang(){
+    /**
+     * Metod untuk memberi tahu dalam array URL dari String parameter banyak kode tipe 
+     * @param kodeTipeGameObject atribut atau metod yang memanggil kodeTipeGameObjekDiMapSekarang()
+     * @return array URL untuk image yang sesuai dengan kodeTipeGamebject
+     */
+    public URL[] tipeGameObjectDiMapSekarang(String kodeTipeGameObject){
         String str=this.kodeTipeGameObjekDiMapSekarang();
         GameObject[] gos=new GameObject[str.length()];
         GameObject temp;

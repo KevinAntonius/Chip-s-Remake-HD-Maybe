@@ -4,6 +4,8 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -15,7 +17,6 @@ public class FireFloor extends Traps{
      */
     public FireFloor(){
         this.name="Fire Floor";
-        this.url=getClass().getClassLoader().getResource("lava.jpg");
     }
     
     /**
@@ -27,4 +28,8 @@ public class FireFloor extends Traps{
         return new RedShoes();
     }
     
+    @Override
+    public URL sendURL(){
+        return getClass().getClassLoader().getResource("lava.jpg");
+    }
 }

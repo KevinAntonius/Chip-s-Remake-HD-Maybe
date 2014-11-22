@@ -27,50 +27,11 @@ public class Chip {
         this.x=x;
         this.y=y;
         this.death=false;
-        this.downStandURL = getClass().getClassLoader().getResource("downStand.jpg");
-        this.leftStandURL = getClass().getClassLoader().getResource("leftStand.jpg");
-        this.rightStandURL = getClass().getClassLoader().getResource("rightStand.jpg");
-        this.upStandURL = getClass().getClassLoader().getResource("upStand.jpg");
-    }
-    /**
-     * metod untuk Chip berjalan 
-     * Jika:
-     * <ul>
-     * <li>direction=atas, kordinat x dikurang</li>
-     * <li>direction=bawah, kordinat x ditambah</li>
-     * <li>direction=kiri, kordinat y dikurang</li>
-     * <li>direction=kanan, kordinat y ditambah</li>
-     * </ul>
-     * @param direction arah pemain
-     */
-    public void move(int x, int y){
-//        if(direction.equalsIgnoreCase("atas")){
-//        this.x=x--;
-//        }
-//        else if(direction.equalsIgnoreCase("bawah")){
-//        this.x=x++;
-//        }
-//        else if(direction.equalsIgnoreCase("kiri")){
-//        this.y=y--;
-//        }
-//        else if(direction.equalsIgnoreCase("kanan")){
-//            this.y=y++;
-//        }
-        if(x>this.x){
-            this.currentURL=this.downStandURL;
-        }
-        else if(x<this.x){
-            this.currentURL=this.upStandURL;
-        }
-        else if(y>this.y){
-            this.currentURL=this.rightStandURL;
-        }
-        else if(y<this.y){
-            this.currentURL=this.leftStandURL;
-        }
-        
-        this.x=x;
-        this.y=y;
+        this.downStandURL = getClass().getClassLoader().getResource("downStand.png");
+        this.leftStandURL = getClass().getClassLoader().getResource("leftStand.png");
+        this.rightStandURL = getClass().getClassLoader().getResource("rightStand.png");
+        this.upStandURL = getClass().getClassLoader().getResource("upStand.png");
+        this.currentURL=downStandURL;
     }
     
     public void moveUp(){
@@ -89,7 +50,7 @@ public class Chip {
     }
     
     public void moveRight(){
-        this.currentURL=this.sendRightStandURL();
+        this.currentURL=this.rightStandURL;
         this.y++;
     }
     public String getPath(){
@@ -128,19 +89,7 @@ public class Chip {
         return this.inventory.checkIsThere(requirementShoes);
     }
     
-    public URL sendDownStandURL(){
-        return this.downStandURL;
-    }
-    
-    public URL sendUpStandURL(){
-        return this.upStandURL;
-    }
-    
-    public URL sendLeftStandURL(){
-        return this.leftStandURL;
-    }
-    
-    public URL sendRightStandURL(){
-        return this.rightStandURL;
+    public URL sendCurrentURL(){
+        return this.currentURL;
     }
 }

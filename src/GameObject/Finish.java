@@ -4,6 +4,8 @@
  */
 package GameObject;
 
+import java.net.URL;
+
 /**
  *
  * @author STEVEN
@@ -15,7 +17,10 @@ public class Finish extends GameObject{
      */
     public Finish(){
      this.name="Finish";
-     this.url=getClass().getClassLoader().getResource("Finish.jpg");
         
+    }
+       @Override
+    public URL sendURL(){
+        return getClass().getClassLoader().getResource("Finish.jpg");
     }
 }

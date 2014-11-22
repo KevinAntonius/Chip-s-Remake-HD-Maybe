@@ -71,7 +71,7 @@ public class WorldViewer extends JPanel{
                 }
             }
         }
-        this.imgChips = ImageIO.read(this.controller.getChip().sendDownStandURL());
+        this.imgChips = ImageIO.read(this.controller.sendURLChip());
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
     }
