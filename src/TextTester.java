@@ -2,6 +2,7 @@
 import Controller.*;
 import GameObject.GameObject;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  * @author STEVEN
  */
 public class TextTester {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String path="MapLevel";
 //        MapIterable itr=new Level(path);
 //        MapIterator mi=itr.getIterator();

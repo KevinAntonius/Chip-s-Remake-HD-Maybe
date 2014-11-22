@@ -31,20 +31,7 @@ public class WorldViewer extends JPanel{
     public WorldViewer(Controller controller) throws IOException{
         this.controller =controller;
         this.currentURL = null;
-        Object nullExam = null;
-        this.img = new Image[this.controller.getWorld().getKolom()][this.controller.getWorld().getBaris()];
-        for(int i = 0;i<this.controller.getWorld().getKolom();i++){
-            for(int j = 0;j<this.controller.getWorld().getBaris();j++){
-                nullExam = this.controller.getGameObjectAt(i, j);
-                if(nullExam!=null){
-                    this.currentURL = this.controller.sendURLAtObject(i, j);
-                    this.img[j][i] = ImageIO.read(currentURL);
-                }
-            }
-        }
-        this.imgChips = ImageIO.read(this.controller.getChip().sendDownStandURL());
-        this.posisiY = this.controller.getChip().getX();
-        this.posisiX = this.controller.getChip().getY();
+        this.fillContent();
     }
     
     public void clear(Graphics g){
@@ -70,5 +57,22 @@ public class WorldViewer extends JPanel{
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
         repaint();
+    }
+    
+    public void fillContent() throws IOException{
+        Object nullExam = null;
+        this.img = new Image[this.controller.getWorld().getKolom()][this.controller.getWorld().getBaris()];
+        for(int i = 0;i<this.controller.getWorld().getKolom();i++){
+            for(int j = 0;j<this.controller.getWorld().getBaris();j++){
+                nullExam = this.controller.getGameObjectAt(i, j);
+                if(nullExam!=null){
+                    this.currentURL = this.controller.sendURLAtObject(i, j);
+                    this.img[j][i] = ImageIO.read(currentURL);
+                }
+            }
+        }
+        this.imgChips = ImageIO.read(this.controller.getChip().sendDownStandURL());
+        this.posisiY = this.controller.getChip().getX();
+        this.posisiX = this.controller.getChip().getY();
     }
 }

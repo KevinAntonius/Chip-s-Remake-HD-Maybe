@@ -8,7 +8,9 @@ import GameObject.*;
 import Viewer.WorldViewer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Controller implements KeyListener{
     private boolean gameFinish;
     private String path;
     private WorldViewer chips;
-    public void chipMove(int direction){
+    public void chipMove(int direction) throws IOException{
         int x=chip.getX();
         int y=chip.getY();
         if(direction == 8){
@@ -57,6 +59,8 @@ public class Controller implements KeyListener{
                }
                else{
                   this.implementsMapToWorld(newMap);
+                  this.chips.fillContent();
+                  this.chips.moved();
                }
            }
            
@@ -249,7 +253,11 @@ public class Controller implements KeyListener{
         else if(e.getKeyCode() == KeyEvent.VK_DOWN){
             direction = 2;
         }
-        this.chipMove(direction);
+        try {
+            this.chipMove(direction);
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         this.chips.moved();
     }
 
