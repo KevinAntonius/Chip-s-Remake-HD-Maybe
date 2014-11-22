@@ -94,34 +94,20 @@ public class Controller implements KeyListener{
         }
             return false;
     }
-<<<<<<< HEAD
-    private void itemCheck(){
+    private void itemCheck() throws IOException{
         GameObject go = world.getObjectAt(chip.getX(),chip.getY());
         if(go!=null){
             if(go.getName().equalsIgnoreCase("Blue Shoes")){
                 this.chip.getShoes((Shoes)go);
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
+                this.chips.afterTaken(chip.getX(),chip.getY());
             }else if(go.getName().equalsIgnoreCase("Red Shoes")){
                 this.chip.getShoes((Shoes)go);
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
+                this.chips.afterTaken(chip.getX(),chip.getY());
             }else if(go.getName().equalsIgnoreCase("IC")){
-                IC ic=(IC)go;
-=======
-    private void itemCheck() throws IOException{
-        GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
-        if(steven!=null){
-            if(steven.getName().equalsIgnoreCase("Blue Shoes")){
-                this.chip.getShoes((Shoes)steven);
-                this.world.destroyObjectAt(chip.getX(),chip.getY());
-                this.chips.afterTaken(chip.getX(),chip.getY());
-            }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
-                this.chip.getShoes((Shoes)steven);
-                this.world.destroyObjectAt(chip.getX(),chip.getY());
-                this.chips.afterTaken(chip.getX(),chip.getY());
-            }else if(steven.getName().equalsIgnoreCase("IC")){
                 //pikirin lagi
-                IC ic=(IC)steven;
->>>>>>> origin/master
+                IC ic=(IC)go;
                 ic.getIC();
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
                 this.chips.afterTaken(chip.getX(),chip.getY());
@@ -299,15 +285,80 @@ public class Controller implements KeyListener{
     public String[][] getIsiMap(){
         String [][] arrayMap=new String[this.world.getBaris()][this.world.getKolom()];
         String []splitBaris=this.isiMap.split("\n");
-        String []splitKolom;
         for(int i=0;i<splitBaris.length;i++){
-            splitKolom=splitBaris[i].split(" ");
-            arrayMap[i]=splitKolom;
+            for(int j=0;j<splitBaris[i].length();j++){
+                arrayMap[i][j]=splitBaris[i].substring(j, j+1);
+            }
         }
         return arrayMap;
     }
     
-//    public int banyakObjekDiMapSekarang(){
-//        
-//    }
+    public String kodeTipeGameObjekDiMapSekarang(){
+        String str="";
+        String[][] arrayMap=this.getIsiMap();
+        for(int i=0;i<arrayMap.length;i++){
+            for(int j=0;j<arrayMap[i].length;j++){
+                if(str.equalsIgnoreCase("")){
+                    str+=""+arrayMap[i][j];
+                }
+                else{
+                    if(!this.checkExistChar(str, arrayMap[i][j])){
+                        if(!arrayMap[i][j].equalsIgnoreCase("c")){
+                            str=str+arrayMap[i][j];
+                        }
+                    }
+                }
+            }
+        }
+        return str;
+    }
+    
+    private boolean checkExistChar(String str, String newString){
+        boolean exist=false;
+        for(int i=0;i<str.length()&&!exist;i++){
+            if(str.substring(i, i+1).equalsIgnoreCase(newString)){
+                exist=true;
+            }
+        }
+        return exist;
+    }
+    
+    public GameObject[] tipeGameObjectDiMapSekarang(){
+        String str=this.kodeTipeGameObjekDiMapSekarang();
+        GameObject[] gos=new GameObject[str.length()];
+        GameObject temp;
+        String tempKode;
+        for(int i=0;i<gos.length;i++){
+            tempKode=str.substring(i, i+1);
+            if(tempKode.equalsIgnoreCase("w")){
+                temp=new NormalWall();
+            }
+            else if(tempKode.equalsIgnoreCase("m")){
+                temp=new RedShoes();
+            }
+            else if(tempKode.equalsIgnoreCase("f")){
+                temp=new FireFloor();
+            }
+            else if(tempKode.equalsIgnoreCase("i")){
+                temp=new IC();
+            }
+            else if(tempKode.equalsIgnoreCase("p")){
+                temp=new Pool();
+            }
+            else if(tempKode.equalsIgnoreCase("b")){
+                temp=new Barrier();
+            }
+            else if(tempKode.equalsIgnoreCase("r")){
+                temp=new BlueShoes();
+            }
+            else if(tempKode.equalsIgnoreCase("s")){
+                temp=new Finish();
+            }
+            else {
+                temp=new Floor();
+            }
+            gos[i]=temp;
+        }
+        return gos;
+    }
 }
