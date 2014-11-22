@@ -156,7 +156,7 @@ public class Controller implements KeyListener{
             }         
         }
         
-            return false;
+            return isDead;
     }
     
     /**
