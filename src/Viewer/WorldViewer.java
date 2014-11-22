@@ -75,4 +75,9 @@ public class WorldViewer extends JPanel{
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
     }
+    
+    public void afterTaken(int x, int y) throws IOException{
+        this.img[y][x] = ImageIO.read(this.controller.getGameObjectAt(x, y).sendURL());
+        repaint();
+    }
 }
