@@ -69,6 +69,7 @@ public class Controller implements KeyListener{
        else{
            if(this.tryOpenWallOrBarrier(x, y)){
                this.world.destroyObjectAt(x, y);
+               this.chips.afterTaken(x,y);
            }
        }
     }
@@ -93,6 +94,7 @@ public class Controller implements KeyListener{
         }
             return false;
     }
+<<<<<<< HEAD
     private void itemCheck(){
         GameObject go = world.getObjectAt(chip.getX(),chip.getY());
         if(go!=null){
@@ -104,8 +106,25 @@ public class Controller implements KeyListener{
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
             }else if(go.getName().equalsIgnoreCase("IC")){
                 IC ic=(IC)go;
+=======
+    private void itemCheck() throws IOException{
+        GameObject steven = world.getObjectAt(chip.getX(),chip.getY());
+        if(steven!=null){
+            if(steven.getName().equalsIgnoreCase("Blue Shoes")){
+                this.chip.getShoes((Shoes)steven);
+                this.world.destroyObjectAt(chip.getX(),chip.getY());
+                this.chips.afterTaken(chip.getX(),chip.getY());
+            }else if(steven.getName().equalsIgnoreCase("Red Shoes")){
+                this.chip.getShoes((Shoes)steven);
+                this.world.destroyObjectAt(chip.getX(),chip.getY());
+                this.chips.afterTaken(chip.getX(),chip.getY());
+            }else if(steven.getName().equalsIgnoreCase("IC")){
+                //pikirin lagi
+                IC ic=(IC)steven;
+>>>>>>> origin/master
                 ic.getIC();
                 this.world.destroyObjectAt(chip.getX(),chip.getY());
+                this.chips.afterTaken(chip.getX(),chip.getY());
             }
         }   
     }
