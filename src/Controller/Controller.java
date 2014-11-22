@@ -92,6 +92,8 @@ public class Controller implements KeyListener{
             if((this.world.getKodeMapAt(this.chip.getX(), this.chip.getY()).equalsIgnoreCase("f")||this.world.getKodeMapAt(this.chip.getX(), this.chip.getY()).equalsIgnoreCase("p"))&&(this.world.getKodeMapAt(x, y).equalsIgnoreCase("n")||this.world.getKodeMapAt(x, y).equalsIgnoreCase("i")||this.world.getKodeMapAt(x, y).equalsIgnoreCase("m")||this.world.getKodeMapAt(x, y).equalsIgnoreCase("r"))){
                 this.chip.setToNormalWalker();
             }
+           if(this.deathCheck(direction)){
+           }
             if(direction == 2){
                 chip.moveDown();
             }else if(direction == 4){
@@ -101,8 +103,6 @@ public class Controller implements KeyListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
-           if(this.deathCheck()){
-           }
            this.itemCheck();
            
            if(this.finishCheck()){
@@ -135,8 +135,22 @@ public class Controller implements KeyListener{
      * Metod untuk mengecek apakah chip meninggal atau tidak. jika Chip berada di trap FireFloor atau pool tanpa memiliki sepatu yang diperlukan, maka Chip di set meninggal. Tidak jika sebaliknya.
      * @return true jika chip meninggal. Tidak jika chip memang tidak meninggal atau letak chip sekarang bukan trap.
      */
-    private boolean deathCheck(){
-        GameObject go =  world.getObjectAt(chip.getX(), chip.getY());
+    private boolean deathCheck(int direction){
+        int x=0;
+        int y=0;
+        if(direction ==2){
+            x++;
+        }
+        else if(direction ==4){
+            y--;
+        }
+        else if(direction ==6){
+            y++;
+        }
+        else if(direction ==8){
+            x--;
+        }
+        GameObject go =  world.getObjectAt(chip.getX()+x, chip.getY()+y);
         boolean isDead=false;
         if(go!=null){
              if(go.getName().equalsIgnoreCase("Fire Floor")||go.getName().equalsIgnoreCase("Pool")){
