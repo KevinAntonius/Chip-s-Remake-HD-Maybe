@@ -129,7 +129,7 @@ public class Chip {
     }
     
     /**
-     * Mengubah URL di chip menjadi berdiri diatas lava
+     * Metod untuk mengubah URL di chip menjadi berdiri diatas lava
      */
     public void setToLavaWalker(){
         this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnLava.jpg");
@@ -139,7 +139,7 @@ public class Chip {
     }
     
     /**
-     * Mengubah URL di chip menjadi berdiri diatas air
+     * Metod untuk mengubah URL di chip menjadi berdiri diatas air
      */
     public void setToWaterWalker(){
         this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnWaterTrap.jpg");
@@ -149,7 +149,7 @@ public class Chip {
     }
     
     /**
-     * Mengubah URL di chip menjadi berdiri diatas lantai
+     * Metod untuk mengubah URL di chip menjadi berdiri diatas lantai
      */
     public void setToNormalWalker(){
         this.downStandURL = getClass().getClassLoader().getResource("downStand.png");
