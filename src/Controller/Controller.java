@@ -348,10 +348,10 @@ public class Controller implements KeyListener{
                else if(tempObject.equalsIgnoreCase("v")){
                    go=new InvisibleWall();
                }
-               else if(tempObject.equalsIgnoreCase("k")){
+               else if(tempObject.equalsIgnoreCase("a")){
                    go=new VerticalCable();
                }
-               else if(tempObject.equalsIgnoreCase("a")){
+               else if(tempObject.equalsIgnoreCase("k")){
                    go=new HorizontalCable();
                }
                if(tempObject.equalsIgnoreCase("c")){
@@ -594,10 +594,10 @@ public class Controller implements KeyListener{
                else if(tempKode.equalsIgnoreCase("v")){
                    temp=new InvisibleWall();
                }
-               else if(tempKode.equalsIgnoreCase("k")){
+               else if(tempKode.equalsIgnoreCase("a")){
                    temp=new VerticalCable();
                }
-               else if(tempKode.equalsIgnoreCase("a")){
+               else if(tempKode.equalsIgnoreCase("k")){
                    temp=new HorizontalCable();
                }
             else {
