@@ -25,5 +25,6 @@ public class GameOn {
         f.setResizable(false);
         f.setLocation(0, 0);
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

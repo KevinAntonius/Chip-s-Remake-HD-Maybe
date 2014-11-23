@@ -13,10 +13,10 @@ import java.net.URL;
 public class NormalWall extends Wall{
 
     /**
-     * Konstruktor untuk NormalWall yang menginisiasi nama object menjadi "Wall"
+     * Konstruktor untuk NormalWall yang menginisiasi nama object menjadi "Wall".
      */
     public NormalWall(){
-     this.name="Wall";   
+     this.name="Wall";
     }
     
     /**

@@ -13,7 +13,7 @@ import java.net.URL;
 public class FireFloor extends Traps{
 
     /**
-     * Konstruktor untuk FireFloor yang menginisiasi nama object menjadi "Fire Floor"
+     * Konstruktor untuk FireFloor yang menginisiasi nama object menjadi "Fire Floor".
      */
     public FireFloor(){
         this.name="Fire Floor";

@@ -13,7 +13,7 @@ import java.net.URL;
 public class Barrier extends Wall{
 
     /**
-     * Konstruktor Barrier yang menginisiasi nama object menjadi "Barrier"
+     * Konstruktor Barrier yang menginisiasi nama object menjadi "Barrier".
      */
     public Barrier(){
         this.name="Barrier";

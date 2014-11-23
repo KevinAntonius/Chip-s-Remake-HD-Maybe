@@ -13,7 +13,6 @@ import java.net.URL;
 public class World {
     private GameObject[][] object;
     private String[][] mapKode;
-    
     /**
      * Konstruktor World yang menerima parameter banyak baris dan kolom untuk GameObject di World
      * @param x panjang baris

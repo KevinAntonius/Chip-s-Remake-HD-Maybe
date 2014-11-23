@@ -58,7 +58,10 @@ public class Controller implements KeyListener{
      */
     private String isiMap;
     
-    
+    /**
+     * limit step yang bisa dilakukan oleh user.
+     */
+    private int step;
     /**
      * Metod untuk menyuruh chip untuk bergerak. Chip tidak bisa bergerak ke arah 
      * tersebut jika ada tembok atau barrier. Barrier akan hancur jika semua IC 
@@ -103,6 +106,8 @@ public class Controller implements KeyListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
+            this.step--;
+            this.setTrapVisible();
            this.itemCheck();
            
            if(this.finishCheck()){
@@ -132,6 +137,44 @@ public class Controller implements KeyListener{
     }
     
     /**
+     * Metod untuk mengeluarkan trap yang tidak terlihat di posisi chip berada
+     * @param x
+     * @param y 
+     */
+    private void setTrapVisible(){
+        int x=this.chip.getX();
+        int y= this.chip.getY();
+        GameObject go1=world.getObjectAt(x-1, y);
+        GameObject go2=world.getObjectAt(x, y-1);
+        GameObject go3=world.getObjectAt(x+1, y);
+        GameObject go4=world.getObjectAt(x, y+1);
+        if(go1.getName().equalsIgnoreCase("IPool")){
+            world.setGameObjectAt(x-1, y, new Pool(), "p");
+        }
+        else if(go1.getName().equalsIgnoreCase("IFire Floor")){
+            world.setGameObjectAt(x-1, y, new Pool(), "p");
+        }
+        if(go2.getName().equalsIgnoreCase("IPool")){
+            world.setGameObjectAt(x, y-1, new Pool(), "p");
+        }
+        else if(go2.getName().equalsIgnoreCase("IFire Floor")){
+            world.setGameObjectAt(x, y-1, new Pool(), "p");
+        }
+        if(go3.getName().equalsIgnoreCase("IPool")){
+            world.setGameObjectAt(x+1, y, new Pool(), "p");
+        }
+        else if(go3.getName().equalsIgnoreCase("IFire Floor")){
+            world.setGameObjectAt(x+1, y, new Pool(), "p");
+        }
+        if(go4.getName().equalsIgnoreCase("IPool")){
+            world.setGameObjectAt(x, y+1, new Pool(), "p");
+        }
+        else if(go4.getName().equalsIgnoreCase("IFire Floor")){
+            world.setGameObjectAt(x, y+1, new Pool(), "p");
+        }
+    }
+    
+    /**
      * Metod untuk mengecek apakah chip meninggal atau tidak. jika Chip berada di trap FireFloor atau pool tanpa memiliki sepatu yang diperlukan, maka Chip di set meninggal. Tidak jika sebaliknya.
      * @return true jika chip meninggal. Tidak jika chip memang tidak meninggal atau letak chip sekarang bukan trap.
      */
@@ -153,16 +196,16 @@ public class Controller implements KeyListener{
         GameObject go =  world.getObjectAt(chip.getX()+x, chip.getY()+y);
         boolean isDead=false;
         if(go!=null){
-             if(go.getName().equalsIgnoreCase("Fire Floor")||go.getName().equalsIgnoreCase("Pool")){
+             if(go.getName().equalsIgnoreCase("Fire Floor")||go.getName().equalsIgnoreCase("Pool")||go.getName().equalsIgnoreCase("HCable")||go.getName().equalsIgnoreCase("VCable")||go.getName().equalsIgnoreCase("IFire Floor")||go.getName().equalsIgnoreCase("IPool")){
                 Traps trap=(Traps) go;
                 if(!chip.shoesCheck(trap.getRequirementShoes())){
                 chip.isDead();
                 }
                 else{
-                    if(go.getName().equalsIgnoreCase("Fire Floor")){
+                    if(go.getName().equalsIgnoreCase("Fire Floor")||go.getName().equalsIgnoreCase("IFire Floor")){
                         this.chip.setToLavaWalker();
                     }
-                    else if(go.getName().equalsIgnoreCase("Pool")){
+                    else if(go.getName().equalsIgnoreCase("Pool")||go.getName().equalsIgnoreCase("IPool")){
                         this.chip.setToWaterWalker();
                     }
                 }
@@ -241,6 +284,7 @@ public class Controller implements KeyListener{
      * @return map dengan leve selanjutnya
      */
     private Map nextLevel(){
+        this.step=150;
         return (Map)this.maps.getIterator().next();
     }
     
@@ -294,6 +338,21 @@ public class Controller implements KeyListener{
                }
                else if(tempObject.equalsIgnoreCase("n")){
                    go=new Floor();
+               }
+               else if(tempObject.equalsIgnoreCase("l")){
+                   go=new InvisibleFireFloor();
+               }
+               else if(tempObject.equalsIgnoreCase("o")){
+                   go=new InvisiblePoolTrap();
+               }
+               else if(tempObject.equalsIgnoreCase("v")){
+                   go=new InvisibleWall();
+               }
+               else if(tempObject.equalsIgnoreCase("k")){
+                   go=new VerticalCable();
+               }
+               else if(tempObject.equalsIgnoreCase("a")){
+                   go=new HorizontalCable();
                }
                if(tempObject.equalsIgnoreCase("c")){
                    tempObject="n";
@@ -390,6 +449,8 @@ public class Controller implements KeyListener{
                   this.implementsMapToWorld(newMap);
                     try {
                         this.worldViewer.fillContent();
+                        this.worldViewer.setImage();
+                    this.worldViewer.repaint();
                     } catch (IOException ex) {
                         Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                     }
@@ -402,6 +463,7 @@ public class Controller implements KeyListener{
             try {
                 this.worldViewer.fillContent();
                 this.worldViewer.repaint();
+                this.worldViewer.setImage();
             } catch (IOException ex) {
                 Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
@@ -421,12 +483,14 @@ public class Controller implements KeyListener{
      * @return Map lvl pertama
      */
     public Map restart(){
+        this.step=150;
         IC ic=new IC();
         while(IC.totalChip!=0){
             ic.getIC();
         }
         maps=new Level(path);
         MapIterator mapi=maps.newIterator();
+        
         return (Map)mapi.next();
     }
     
@@ -453,7 +517,15 @@ public class Controller implements KeyListener{
                 else{
                     if(!this.checkExistChar(str, arrayMap[i][j])){
                         if(!arrayMap[i][j].equalsIgnoreCase("c")){
-                            str=str+arrayMap[i][j];
+                            if(arrayMap[i][j].equalsIgnoreCase("l")){
+                                str=str+"lf";
+                            }
+                            else if(arrayMap[i][j].equalsIgnoreCase("o")){
+                                str=str+"op";
+                            }
+                            else{
+                                str=str+arrayMap[i][j];
+                            }
                         }
                     }
                 }
@@ -484,7 +556,7 @@ public class Controller implements KeyListener{
      * @return array URL untuk image yang sesuai dengan kodeTipeGamebject
      */
     public URL[] tipeGameObjectDiMapSekarang(String kodeTipeGameObject){
-        String str=this.kodeTipeGameObjekDiMapSekarang();
+        String str=kodeTipeGameObject;
         GameObject[] gos=new GameObject[str.length()];
         GameObject temp;
         String tempKode;
@@ -516,6 +588,18 @@ public class Controller implements KeyListener{
             else if(tempKode.equalsIgnoreCase("s")){
                 temp=new Finish();
             }
+               else if(tempKode.equalsIgnoreCase("o")){
+                   temp=new InvisiblePoolTrap();
+               }
+               else if(tempKode.equalsIgnoreCase("v")){
+                   temp=new InvisibleWall();
+               }
+               else if(tempKode.equalsIgnoreCase("k")){
+                   temp=new VerticalCable();
+               }
+               else if(tempKode.equalsIgnoreCase("a")){
+                   temp=new HorizontalCable();
+               }
             else {
                 temp=new Floor();
             }

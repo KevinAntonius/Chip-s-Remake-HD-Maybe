@@ -13,8 +13,6 @@ import java.net.URL;
  */
 public abstract class GameObject {
     protected String name;
-    protected URL url;
-    
     /**
      * Metod untuk mengembalikan nama dari GameObject ini
      * @return 

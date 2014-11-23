@@ -34,6 +34,7 @@ public class WorldViewer extends JPanel {
         this.controller = controller;
         this.setImage();
         this.fillContent();
+        
     }
 
     public void clear(Graphics g) {

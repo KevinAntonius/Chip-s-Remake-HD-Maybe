@@ -14,7 +14,8 @@ public class IC extends GameObject{
     public static int totalChip=0;
     
     /**
-     * Konstruktor untuk IC yang menginisiasi nama object menjadi "IC"
+     * Konstruktor untuk IC yang menginisiasi nama object menjadi "IC".
+     * total chip pun akan bertambah.
      */
     public IC(){
         this.name="IC";

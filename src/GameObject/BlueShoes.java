@@ -13,7 +13,7 @@ import java.net.URL;
 public class BlueShoes extends Shoes {
     
     /**
-     * Konstruktor untuk BlueShoes yang menginisiasi nama object menjadi "Blue Shoes"
+     * Konstruktor untuk BlueShoes yang menginisiasi nama object menjadi "Blue Shoes".
      */
     public BlueShoes(){
         this.name="Blue Shoes";

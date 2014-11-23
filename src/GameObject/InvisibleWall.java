@@ -10,16 +10,9 @@ import java.net.URL;
  *
  * @author STEVEN
  */
-public class Floor extends GameObject{
-    /**
-     * Konstruktor untuk Floor yang menginisiasi nama object menjadi "Floor".
-     */
-    public Floor(){
-       this.name="Floor";
-    }
-    
-    @Override
+public class InvisibleWall extends NormalWall{
+   @Override
     public URL sendURL(){
         return getClass().getClassLoader().getResource("Floor.jpg");
-    }
+        } 
 }

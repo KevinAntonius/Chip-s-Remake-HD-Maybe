@@ -13,10 +13,10 @@ import java.net.URL;
 public class Finish extends GameObject{
     
     /**
-     * Konstruktor untuk Finish yang menginisiasi nama object menjadi "Finish"
+     * Konstruktor untuk Finish yang menginisiasi nama object menjadi "Finish".
      */
     public Finish(){
-     this.name="Finish";
+        this.name="Finish";
         
     }
        @Override

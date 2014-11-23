@@ -13,7 +13,7 @@ import java.net.URL;
 public class Pool extends Traps{
 
     /**
-     * Konstruktor untuk Pool yang menginisiasi nama object menjadi "Pool"
+     * Konstruktor untuk Pool yang menginisiasi nama object menjadi "Pool".
      */
     public Pool(){
         this.name="Pool";
