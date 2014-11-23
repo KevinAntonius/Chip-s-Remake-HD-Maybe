@@ -29,11 +29,9 @@ public class WorldViewer extends JPanel {
     private Image imgChips;
     private int posisiX;
     private int posisiY;
-    private URL currentURL;
 
     public WorldViewer(Controller controller) throws IOException {
         this.controller = controller;
-        this.currentURL = null;
         this.setImage();
         this.fillContent();
     }
@@ -62,7 +60,6 @@ public class WorldViewer extends JPanel {
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
         try {
-            //coba diskusiin
             this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
         } catch (IOException ex) {
             Logger.getLogger(WorldViewer.class.getName()).log(Level.SEVERE, null, ex);
