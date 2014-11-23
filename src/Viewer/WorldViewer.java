@@ -43,17 +43,25 @@ public class WorldViewer extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         this.clear(g);
-        Image currentImg = null;
-        for (int i = 0; i < this.mapPattern.length; i++) {
-            for (int j = 0; j < this.mapPattern[i].length; j++) {
-                int index = 0;
-                while (!this.mapPattern[i][j].equals(this.kodeMap[index])) {
-                    index++;
-                }
-                g.drawImage(img[index], j*40, i*40, this);
-            }
+        if(this.controller.getGameFinish()){
+            g.drawString("YOU WIN", 200, 200);
         }
-        g.drawImage(imgChips, this.posisiX * 40, this.posisiY * 40, this);
+        else if(this.controller.getChip().getDead()){
+            g.drawString("YOU LOSE", 200, 200);
+        }
+        else{
+            Image currentImg = null;
+            for (int i = 0; i < this.mapPattern.length; i++) {
+                for (int j = 0; j < this.mapPattern[i].length; j++) {
+                    int index = 0;
+                    while (!this.mapPattern[i][j].equals(this.kodeMap[index])) {
+                        index++;
+                    }
+                    g.drawImage(img[index], j*40, i*40, this);
+                }
+            }
+            g.drawImage(imgChips, this.posisiX * 40, this.posisiY * 40, this);
+        }
     }
 
     public void moved() {
