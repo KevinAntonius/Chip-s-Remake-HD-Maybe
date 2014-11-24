@@ -21,7 +21,7 @@ public class GameOn {
         controller.implementsWorldViewer(world);
         f.getContentPane().add("Center",world);
         f.addKeyListener(controller);
-        f.setSize(495,503);
+        f.setSize(485,543);
         f.setResizable(false);
         f.setLocation(0, 0);
         f.setVisible(true);

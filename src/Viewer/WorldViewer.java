@@ -5,6 +5,8 @@
 package Viewer;
 
 import Controller.Controller;
+import GameObject.IC;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -30,6 +32,11 @@ public class WorldViewer extends JPanel {
     private int posisiX;
     private int posisiY;
 
+    /**
+     * Konstruktor WorldViewer untuk menginisiasi controller
+     * @param controller
+     * @throws IOException 
+     */
     public WorldViewer(Controller controller) throws IOException {
         this.controller = controller;
         this.setImage();
@@ -37,15 +44,17 @@ public class WorldViewer extends JPanel {
         
     }
 
-    public void clear(Graphics g) {
-        super.paintComponent(g);
-    }
-
+    /**
+     * Method override dari JPanel untuk menggambar komponen
+     * @param g object Graphics
+     */
     @Override
     public void paintComponent(Graphics g) {
-        this.clear(g);
+        super.paintComponent(g);
+        g.setFont(new Font("Alien Encounters", Font.BOLD, 20));
         if(this.controller.getGameFinish()){
             g.drawString("YOU WIN", 200, 200);
+            g.drawString(String.format("Score : %d", this.controller.getStep()),180,240);
         }
         else if(this.controller.getChip().getDead()){
             g.drawString("YOU LOSE", 200, 200);
@@ -62,9 +71,15 @@ public class WorldViewer extends JPanel {
                 }
             }
             g.drawImage(imgChips, this.posisiX * 40, this.posisiY * 40, this);
+            g.setFont(new Font("Alien Encounters", Font.BOLD, 20));
+            g.drawString(String.format("IC yang tersisa : %d", IC.totalChip), 230, 503);
+            g.drawString(String.format("Score : %d", this.controller.getStep()),80,503);
         }
     }
 
+    /**
+     * Method untuk menggambarkan hasil perpindahan tempat Chip
+     */
     public void moved() {
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
@@ -76,17 +91,31 @@ public class WorldViewer extends JPanel {
         repaint();
     }
 
+    /**
+     * Method untuk menginisiasi mapPattern dan lokasi Chip berdasarkan koordinat x,y
+     * @throws IOException 
+     */
     public void fillContent() throws IOException {
         this.mapPattern = this.controller.getWorld().getIsiMap();
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
     }
 
+    /**
+     * Method untuk menggambarkan perubahan setelah Chip mengambil object seperti IC dan sepatu
+     * @param x lokasi object berdasarkan koordinat X
+     * @param y lokasi object berdasarkan koordinat Y
+     * @throws IOException 
+     */
     public void afterTaken(int x, int y) throws IOException {
         this.mapPattern[x][y]=this.controller.getKodeMapAt(x, y);
         repaint();
     }
 
+    /**
+     * Method untuk menginisialisasikan gambar - gambar yang akan digunakan
+     * @throws IOException 
+     */
     public void setImage() throws IOException {
         String codeTemp = this.controller.kodeTipeGameObjekDiMapSekarang();
         URL[] urlTemp = this.controller.tipeGameObjectDiMapSekarang(codeTemp);

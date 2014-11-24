@@ -320,7 +320,7 @@ public class Controller implements KeyListener,ActionListener{
      */
     public Map start(String path){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\STEVEN\\Documents\\file mata kuliah\\Tugas kuliah\\Semester 3\\ADBO\\project besar\\ChipsChallengeSimpleMode\\src\\Mission Impossible.mid").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Mission Impossible.mid").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -332,6 +332,7 @@ public class Controller implements KeyListener,ActionListener{
         maps=new Level(path);
         MapIterator mapi=maps.getIterator();
         this.currentMap=(Map)mapi.next();
+        this.step = 150;
         return this.currentMap;
     }
     
@@ -340,7 +341,7 @@ public class Controller implements KeyListener,ActionListener{
      * @return map dengan leve selanjutnya
      */
     private Map nextLevel(){
-        this.step=150;
+        this.step+=150;
         return (Map)this.maps.getIterator().next();
     }
     
@@ -745,5 +746,13 @@ public class Controller implements KeyListener,ActionListener{
                 }
         this.counterPortal++;
         }
+    }
+    
+    /**
+     * Method untuk mendapatkan jumlah step yang tersisa
+     * @return int step
+     */
+    public int getStep(){
+        return this.step;
     }
 }
