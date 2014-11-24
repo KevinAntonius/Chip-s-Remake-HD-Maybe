@@ -132,20 +132,20 @@ public class Chip {
      * Metod untuk mengubah URL di chip menjadi berdiri diatas lava
      */
     public void setToLavaWalker(){
-        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnLava.jpg");
-        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnLava.jpg");
-        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnLava.jpg");
-        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnLava.jpg");
+        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnLava.png");
+        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnLava.png");
+        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnLava.png");
+        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnLava.png");
     }
     
     /**
      * Metod untuk mengubah URL di chip menjadi berdiri diatas air
      */
     public void setToWaterWalker(){
-        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnWaterTrap.jpg");
-        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnWaterTrap.jpg");
-        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnWaterTrap.jpg");
-        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnWaterTrap.jpg");
+        this.downStandURL = getClass().getClassLoader().getResource("moveDownStandOnWaterTrap.png");
+        this.leftStandURL = getClass().getClassLoader().getResource("moveLeftStandOnWaterTrap.png");
+        this.rightStandURL = getClass().getClassLoader().getResource("moveRightStandOnWaterTrap.png");
+        this.upStandURL = getClass().getClassLoader().getResource("moveUpStandOnWaterTrap.png");
     }
     
     /**
@@ -157,4 +157,26 @@ public class Chip {
         this.rightStandURL = getClass().getClassLoader().getResource("rightStand.png");
         this.upStandURL = getClass().getClassLoader().getResource("upStand.png");
    }
+    /**
+     * Metod untuk mengubah URL di chip menjadi berdiri diatas air
+     */
+    public void setToNoLeg(){
+        this.downStandURL = getClass().getClassLoader().getResource("chipNoLegDownStand.png");
+        this.leftStandURL = getClass().getClassLoader().getResource("chipNoLegLeftStand.png");
+        this.rightStandURL = getClass().getClassLoader().getResource("chipNoLegRightStand.png");
+        this.upStandURL = getClass().getClassLoader().getResource("chipNoLegUpStand.png");
+    }
+    
+    public void setToLeft(){
+        this.currentURL=this.leftStandURL;
+    }
+    public void setToRight(){
+        this.currentURL=this.rightStandURL;
+    }
+    public void setToUp(){
+        this.currentURL=this.upStandURL;
+    }
+    public void setToDown(){
+        this.currentURL=this.downStandURL;
+    }
 }

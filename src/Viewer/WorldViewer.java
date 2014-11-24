@@ -69,7 +69,7 @@ public class WorldViewer extends JPanel {
         this.posisiY = this.controller.getChip().getX();
         this.posisiX = this.controller.getChip().getY();
         try {
-            this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
+           this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
         } catch (IOException ex) {
             Logger.getLogger(WorldViewer.class.getName()).log(Level.SEVERE, null, ex);
         }

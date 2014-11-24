@@ -6,17 +6,20 @@ package Controller;
 
 import GameObject.*;
 import Viewer.WorldViewer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
  * @author STEVEN
  */
-public class Controller implements KeyListener{
+public class Controller implements KeyListener,ActionListener{
     /**
      * Chip yang menjadi pemain utama dalam permainan ini dan dikontrol oleh user.
      */
@@ -32,6 +35,11 @@ public class Controller implements KeyListener{
      * Kumpulan Map untuk diimplementasikan ke World
      */
     private MapIterable maps;
+    
+    /**
+     * Map yang sekarang sedang diimplementasikan
+     */
+    private Map currentMap;
     
     /**
      * Atribut untuk menandakan bahwa tidak ada map lagi yang tersedia
@@ -62,6 +70,31 @@ public class Controller implements KeyListener{
      * limit step yang bisa dilakukan oleh user.
      */
     private int step;
+    
+    /**
+     * Atribut untuk menghitung berapa putaran chip ketika masuk portal
+     */
+    private int counterPortal;
+    
+    /**
+     * Waktu yang digunakan untuk masuk portal
+     */
+    private Timer timer;
+    
+    /**
+     * Atribut untuk menandakan untuk masuk portal
+     */
+    private boolean toPortal;
+    
+    /**
+     * Konstruktor Controller yang menginisiasi waktu
+     */
+    public Controller()
+    {
+                Timer timer=new Timer(500,this);
+                timer.start();
+    }
+    
     /**
      * Metod untuk menyuruh chip untuk bergerak. Chip tidak bisa bergerak ke arah 
      * tersebut jika ada tembok atau barrier. Barrier akan hancur jika semua IC 
@@ -144,33 +177,42 @@ public class Controller implements KeyListener{
     private void setTrapVisible(){
         int x=this.chip.getX();
         int y= this.chip.getY();
-        GameObject go1=world.getObjectAt(x-1, y);
-        GameObject go2=world.getObjectAt(x, y-1);
-        GameObject go3=world.getObjectAt(x+1, y);
-        GameObject go4=world.getObjectAt(x, y+1);
-        if(go1.getName().equalsIgnoreCase("IPool")){
-            world.setGameObjectAt(x-1, y, new Pool(), "p");
+        GameObject go1;
+        if(world.getBaris()>x-1&&-1<x-1){
+            go1=world.getObjectAt(x-1, y);  
+            if(go1.getName().equalsIgnoreCase("IPool")){
+                world.setGameObjectAt(x-1, y, new Pool(), "p");
+            }
+            else if(go1.getName().equalsIgnoreCase("IFire Floor")){
+                world.setGameObjectAt(x-1, y, new Pool(), "f");
+            }
         }
-        else if(go1.getName().equalsIgnoreCase("IFire Floor")){
-            world.setGameObjectAt(x-1, y, new Pool(), "p");
+        if(world.getBaris()>x+1&&-1<x+1){
+            go1=world.getObjectAt(x+1, y);  
+            if(go1.getName().equalsIgnoreCase("IPool")){
+                world.setGameObjectAt(x+1, y, new Pool(), "p");
+            }
+            else if(go1.getName().equalsIgnoreCase("IFire Floor")){
+                world.setGameObjectAt(x+1, y, new Pool(), "f");
+            }
         }
-        if(go2.getName().equalsIgnoreCase("IPool")){
-            world.setGameObjectAt(x, y-1, new Pool(), "p");
+        if(world.getKolom()>y+1&&-1<y+1){
+            go1=world.getObjectAt(x, y+1);  
+            if(go1.getName().equalsIgnoreCase("IPool")){
+                world.setGameObjectAt(x, y+1, new Pool(), "p");
+            }
+            else if(go1.getName().equalsIgnoreCase("IFire Floor")){
+                world.setGameObjectAt(x, y+1, new Pool(), "f");
+            }
         }
-        else if(go2.getName().equalsIgnoreCase("IFire Floor")){
-            world.setGameObjectAt(x, y-1, new Pool(), "p");
-        }
-        if(go3.getName().equalsIgnoreCase("IPool")){
-            world.setGameObjectAt(x+1, y, new Pool(), "p");
-        }
-        else if(go3.getName().equalsIgnoreCase("IFire Floor")){
-            world.setGameObjectAt(x+1, y, new Pool(), "p");
-        }
-        if(go4.getName().equalsIgnoreCase("IPool")){
-            world.setGameObjectAt(x, y+1, new Pool(), "p");
-        }
-        else if(go4.getName().equalsIgnoreCase("IFire Floor")){
-            world.setGameObjectAt(x, y+1, new Pool(), "p");
+        if(world.getKolom()>y-1&&-1<y-1){
+            go1=world.getObjectAt(x, y-1);  
+            if(go1.getName().equalsIgnoreCase("IPool")){
+                world.setGameObjectAt(x, y-1, new Pool(), "p");
+            }
+            else if(go1.getName().equalsIgnoreCase("IFire Floor")){
+                world.setGameObjectAt(x, y-1, new Pool(), "f");
+            }
         }
     }
     
@@ -276,7 +318,8 @@ public class Controller implements KeyListener{
         this.path=path;
         maps=new Level(path);
         MapIterator mapi=maps.getIterator();
-        return (Map)mapi.next();
+        this.currentMap=(Map)mapi.next();
+        return this.currentMap;
     }
     
     /**
@@ -440,8 +483,45 @@ public class Controller implements KeyListener{
             this.worldViewer.moved();
         }
         else if(this.finishLevel){
-            if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-                Map newMap=this.nextLevel();
+            if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                this.toPortal=true;
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+                this.implementsMapToWorld(this.restart());
+            try {
+                this.worldViewer.fillContent();
+                this.worldViewer.repaint();
+                this.worldViewer.setImage();
+            } catch (IOException ex) {
+                Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            }
+        else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            System.exit(0);
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+        this.implementsMapToWorld(this.reset());
+            try {
+                this.worldViewer.fillContent();
+                this.worldViewer.repaint();
+                this.worldViewer.setImage();
+            } catch (IOException ex) {
+                Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
+    
+    
+    private void moveChipToNextLevel(){
+        this.toPortal=false;
+        Map newMap=this.nextLevel();
+                this.currentMap=newMap;
                if(newMap==null){
                    this.gameFinish=true;
                }
@@ -456,33 +536,13 @@ public class Controller implements KeyListener{
                     }
                   this.worldViewer.moved();
                }
-            }
-        }
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                this.implementsMapToWorld(this.restart());
-            try {
-                this.worldViewer.fillContent();
-                this.worldViewer.repaint();
-                this.worldViewer.setImage();
-            } catch (IOException ex) {
-                Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-            }
-        else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-            System.exit(0);
-        }
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        
-    }
-    
     /**
      * Metod untuk merestart map. Metod ini juga mengembalikan banyak IC menjadi 0.
      * @return Map lvl pertama
      */
     public Map restart(){
+        this.toPortal=false;
         this.step=150;
         IC ic=new IC();
         while(IC.totalChip!=0){
@@ -490,8 +550,17 @@ public class Controller implements KeyListener{
         }
         maps=new Level(path);
         MapIterator mapi=maps.newIterator();
-        
-        return (Map)mapi.next();
+        this.currentMap=(Map)mapi.next();
+        return this.currentMap;
+    }
+    
+    public Map reset(){
+        this.toPortal=false;
+        IC ic=new IC();
+        while(IC.totalChip!=0){
+            ic.getIC();
+        }
+        return this.currentMap;
     }
     
     /**
@@ -620,6 +689,48 @@ public class Controller implements KeyListener{
      */
     public String getKodeMapAt(int x, int y){
         return this.world.getKodeMapAt(x, y);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(this.toPortal)
+        {
+        int count=this.counterPortal%4;
+        if(count==0){
+            this.chip.setToDown();
+        }
+        else if(count==1){
+            this.chip.setToLeft();
+        }
+        else if(count==2){
+            this.chip.setToUp();
+        }
+        else if(count==3){
+            this.chip.setToRight();
+        }
+        if(count==0||count==1||count==2||count==3){
+                this.worldViewer.moved();
+            try {
+                this.worldViewer.fillContent();
+            } catch (IOException ex) {
+                Logger.getLogger(Controller.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
         
+        }
+                    if(counterPortal==3){
+                        this.chip.setToLavaWalker();
+                    }
+                    else if(counterPortal==7){
+                        this.chip.setToNoLeg();
+                    }
+                    else if(counterPortal==11){
+                        this.chip.setToWaterWalker();
+                    }
+                if(this.counterPortal==15){
+                    this.counterPortal=0;
+                   this.moveChipToNextLevel();
+                }
+        this.counterPortal++;
+        }
     }
 }
