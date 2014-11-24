@@ -502,6 +502,7 @@ public class Controller implements KeyListener,ActionListener{
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            this.gameFinish=false;
                 this.implementsMapToWorld(this.restart());
             try {
                 this.worldViewer.fillContent();
@@ -515,6 +516,7 @@ public class Controller implements KeyListener,ActionListener{
             System.exit(0);
         }
         else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            this.gameFinish=false;
         this.implementsMapToWorld(this.reset());
             try {
                 this.worldViewer.fillContent();
