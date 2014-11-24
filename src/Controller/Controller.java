@@ -10,9 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 
 /**
@@ -315,6 +319,15 @@ public class Controller implements KeyListener,ActionListener{
      * @return Map level perama
      */
     public Map start(String path){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\STEVEN\\Documents\\file mata kuliah\\Tugas kuliah\\Semester 3\\ADBO\\project besar\\ChipsChallengeSimpleMode\\src\\Mission Impossible.mid").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
         this.path=path;
         maps=new Level(path);
         MapIterator mapi=maps.getIterator();
