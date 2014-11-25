@@ -17,7 +17,7 @@ public class GameOn {
     public static void main(String[] args) throws IOException{
         JFrame f = new JFrame("Chip's Challenge");
         Controller controller = new Controller();
-        controller.implementsMapToWorld(controller.start("src\\MapLevel"));
+        controller.implementsMapToWorld(controller.start("MapLevel"));
         WorldViewer world = new WorldViewer(controller);
         controller.implementsWorldViewer(world);
         f.getContentPane().add("Center",world);

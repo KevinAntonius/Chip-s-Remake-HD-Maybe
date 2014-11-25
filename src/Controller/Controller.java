@@ -325,7 +325,7 @@ public class Controller implements KeyListener,ActionListener{
      */
     public Map start(String path){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src\\Mission Impossible.mid").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Mission Impossible.mid").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
