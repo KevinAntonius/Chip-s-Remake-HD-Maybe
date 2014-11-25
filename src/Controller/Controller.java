@@ -181,9 +181,7 @@ public class Controller implements KeyListener,ActionListener{
     }
     
     /**
-     * Metod untuk mengeluarkan trap yang tidak terlihat di posisi chip berada
-     * @param x
-     * @param y 
+     * Metod untuk mengeluarkan trap yang tidak terlihat di sekitar posisi chip berada
      */
     private void setTrapVisible(){
         int x=this.chip.getX();
@@ -322,7 +320,7 @@ public class Controller implements KeyListener,ActionListener{
     
     /**
      * Metod untuk menginisialisasi kumpulan map melalui parameter path dan lalu memulai game dengan map pertama
-     * @param path 
+     * @param path path file
      * @return Map level perama
      */
     public Map start(String path){
@@ -346,7 +344,7 @@ public class Controller implements KeyListener,ActionListener{
     
     /**
      * Metod untuk melanjutkan map dengan level selanjutnya
-     * @return map dengan leve selanjutnya
+     * @return map dengan level selanjutnya
      */
     private Map nextLevel(){
         this.step+=150;
@@ -439,7 +437,7 @@ public class Controller implements KeyListener,ActionListener{
    
    /**
     * Metod untuk mendapatkan Chip
-    * @return 
+    * @return URL current chip
     */
    public URL sendURLChip(){
        return this.chip.sendCurrentURL();
@@ -458,15 +456,15 @@ public class Controller implements KeyListener,ActionListener{
     
     /**
      * Metod untuk mengembalikan atribut gameFinish
-     * @return 
+     * @return true jika game finisih, false jika game belum finish 
      */
     public boolean getGameFinish(){
         return this.gameFinish;
     }
 
     /**
-     * Metod untuk mengembalikan atribu world
-     * @return 
+     * Metod untuk mengembalikan atribut world
+     * @return world yang di atribut
      */
     public World getWorld(){
         return this.world;
@@ -541,7 +539,9 @@ public class Controller implements KeyListener,ActionListener{
         
     }
     
-    
+    /**
+     * Metod untuk menangani chip untuk pindah level. 
+     */
     private void moveChipToNextLevel(){
         this.toPortal=false;
         Map newMap=this.nextLevel();
@@ -581,6 +581,10 @@ public class Controller implements KeyListener,ActionListener{
         return this.currentMap;
     }
     
+    /**
+     * Metod untuk mengulang game
+     * @return Map awal
+     */
     public Map reset(){
         this.toPortal=false;
         IC ic=new IC();
@@ -769,6 +773,10 @@ public class Controller implements KeyListener,ActionListener{
         return this.step;
     }
     
+    /**
+     * Metod untuk mendapatkan atribut gameBegin yang sekarang dan merubahnya menjadi false
+     * @return atribut gameBegin
+     */
     public boolean getStartSignal(){
         boolean temp = this.gameBegin;
         this.gameBegin = false;

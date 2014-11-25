@@ -14,24 +14,39 @@ import java.util.LinkedList;
  * @author STEVEN
  */
 public class LevelIterator implements MapIterator{
+    /**
+     * Atribut untuk mengumpulkan level dalam bentuk file 
+     */
     protected LinkedList<File> fileList;
 	
-	public LevelIterator(String folder)
-	{
-		fileList=new LinkedList<File>();
-		readFolderContent(folder);
-	}
+    /**
+     * Konstruktor LevelIterator yang mulai membaca folder 
+     * @param folder path dari folder map
+     */
+    public LevelIterator(String folder)
+    {
+            fileList=new LinkedList<File>();
+            readFolderContent(folder);
+    }
 	
-	protected void readFolderContent(String folder)
-	{
-		File folderReader=new File(folder);
-		File[] folderContent=folderReader.listFiles();
-		for (int i=0;i<folderContent.length;i++)
-		{
-			fileList.add(folderContent[i]);
-		}
-	}
+    /**
+     * Metod untuk membaca folder dan menambah folder nya untuk ditambahkan ke fileList
+     * @param folder path folder level berada
+     */
+    protected void readFolderContent(String folder)
+    {
+            File folderReader=new File(folder);
+            File[] folderContent=folderReader.listFiles();
+            for (int i=0;i<folderContent.length;i++)
+            {
+                    fileList.add(folderContent[i]);
+            }
+    }
 
+    /**
+     * Metod untuk mendapatkan file (map) selanjutnya
+     * @return Map selanjutnya
+     */
     @Override
     public Object next() {
 		if (fileList.isEmpty())

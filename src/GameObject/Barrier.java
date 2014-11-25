@@ -21,7 +21,7 @@ public class Barrier extends Wall{
     
     /**
      * metod yang akan mengembalikan true jika total chip 0
-     * @return rue jika total chip = 0, false jika sebaliknya
+     * @return true jika total chip = 0, false jika sebaliknya
      */
     @Override
     public boolean tryOpen() {

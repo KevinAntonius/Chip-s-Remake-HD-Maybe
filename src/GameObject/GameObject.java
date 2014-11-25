@@ -15,7 +15,7 @@ public abstract class GameObject {
     protected String name;
     /**
      * Metod untuk mengembalikan nama dari GameObject ini
-     * @return 
+     * @return nama GameObject
      */
     public String getName(){
         return this.name;

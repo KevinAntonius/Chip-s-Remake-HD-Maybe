@@ -14,9 +14,25 @@ import java.util.Scanner;
  * @author STEVEN
  */
 public class Map {
+    /**
+     * Path file 
+     */
     protected String  fileName;
+    
+    /**
+     * File map dari path 
+     */
     protected File mapTxt;
+    
+    /**
+     * Isi map dari file
+     */
     protected String isiMap="";
+    
+    /**
+     * Konstruktor map yang langsung memasukan isi map dan file nya
+     * @param mapTxt File
+     */
     public Map(File mapTxt)
 	{
             this.mapTxt=mapTxt;
@@ -43,6 +59,11 @@ public class Map {
 			e.printStackTrace();
 		}
 	}
+    
+    /**
+     * Metod untuk mendapatkan nama file
+     * @return 
+     */
 	public String getFilename()
 	{
 		return this.getFilename();
@@ -61,7 +82,12 @@ public class Map {
          * b-barrier
          * s-finish
          * c-chip
-         * n-null/normal floor
+         * n-floor
+         * o-invisiblePoolTrap
+         * l-invisibleFireFloor
+         * v-invisibleWall
+         * a-verticalCable
+         * k-horizontalCable
          * -End-
          * @return angka atau kata
          * @throws FileNotFoundException 

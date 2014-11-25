@@ -12,14 +12,49 @@ import java.net.URL;
  * @author STEVEN
  */
 public class Chip {
+    /**
+     * Atribut inventory yang menyimpan Shoes dan selalu tersedia 2 tempat
+     */
     private Inventory inventory=new Inventory(2);
+    
+    /**
+     * Atribut yang menandakan apakah chip meninggal atau tidak
+     */
     private boolean death;
+    
+    /**
+     * Baris di mana chip berada
+     */
     private int x;
+    
+    /**
+     * Kolom di mana chip berada
+     */
     private int y;
+    
+    /**
+     * URL saat chip menghadap ke bawah
+     */
     private URL downStandURL;
+    
+    /**
+     * URL saat chip menghadap ke kiri
+     */
     private URL leftStandURL;
+    
+    /**
+     * URL saat chip menghadap ke atas
+     */
     private URL upStandURL;
+    
+    /**
+     * URL saat chip menghadap ke kanan
+     */
     private URL rightStandURL;
+    
+    /**
+     * URL arah chip sekarang
+     */
     private URL currentURL;
     
     /**
@@ -103,7 +138,7 @@ public class Chip {
     
     /**
      * Metod untuk mendapatkan shoes sesuai di parameter
-     * @param shoe 
+     * @param shoe Shoes yang diambil
      */
     public void getShoes(Shoes shoe){
         if(shoe!=null){
@@ -167,15 +202,27 @@ public class Chip {
         this.upStandURL = getClass().getClassLoader().getResource("chipNoLegUpStand.png");
     }
     
+    /**
+     * Metod untuk mengubah currentURL ke leftStandURL
+     */
     public void setToLeft(){
         this.currentURL=this.leftStandURL;
     }
+    /**
+     * Metod untuk mengubah currentURL ke rightStandURL
+     */
     public void setToRight(){
         this.currentURL=this.rightStandURL;
     }
+    /**
+     * Metod untuk mengubah currentURL ke upStandURL
+     */
     public void setToUp(){
         this.currentURL=this.upStandURL;
     }
+    /**
+     * Metod untuk mengubah currentURL ke downStandURL
+     */
     public void setToDown(){
         this.currentURL=this.downStandURL;
     }
