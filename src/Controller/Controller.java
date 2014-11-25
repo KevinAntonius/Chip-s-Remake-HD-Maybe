@@ -46,6 +46,11 @@ public class Controller implements KeyListener,ActionListener{
     private Map currentMap;
     
     /**
+     * Atribut untuk menandakan bahwa game baru saja mulai
+     */
+    private boolean gameBegin;
+    
+    /**
      * Atribut untuk menandakan bahwa tidak ada map lagi yang tersedia
      */
     private boolean gameFinish;
@@ -143,7 +148,9 @@ public class Controller implements KeyListener,ActionListener{
             }else if(direction == 8){
                 chip.moveUp();
             }
-            this.step--;
+            if(direction==2||direction==6||direction==4||direction==8){
+                this.step--;
+            }
             this.setTrapVisible();
            this.itemCheck();
            
@@ -333,6 +340,7 @@ public class Controller implements KeyListener,ActionListener{
         MapIterator mapi=maps.getIterator();
         this.currentMap=(Map)mapi.next();
         this.step = 150;
+        this.gameBegin = true;
         return this.currentMap;
     }
     
@@ -537,7 +545,10 @@ public class Controller implements KeyListener,ActionListener{
     private void moveChipToNextLevel(){
         this.toPortal=false;
         Map newMap=this.nextLevel();
+        if(newMap!=null){
                 this.currentMap=newMap;
+        
+        }
                if(newMap==null){
                    this.gameFinish=true;
                }
@@ -559,7 +570,6 @@ public class Controller implements KeyListener,ActionListener{
      */
     public Map restart(){
         this.toPortal=false;
-        this.step=150;
         IC ic=new IC();
         while(IC.totalChip!=0){
             ic.getIC();
@@ -567,6 +577,7 @@ public class Controller implements KeyListener,ActionListener{
         maps=new Level(path);
         MapIterator mapi=maps.newIterator();
         this.currentMap=(Map)mapi.next();
+        this.step=150;
         return this.currentMap;
     }
     
@@ -756,5 +767,11 @@ public class Controller implements KeyListener,ActionListener{
      */
     public int getStep(){
         return this.step;
+    }
+    
+    public boolean getStartSignal(){
+        boolean temp = this.gameBegin;
+        this.gameBegin = false;
+        return temp;
     }
 }

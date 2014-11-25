@@ -29,6 +29,7 @@ public class WorldViewer extends JPanel {
     private String[][] mapPattern;
     private Image[] img;
     private Image imgChips;
+    private Image tutorial;
     private int posisiX;
     private int posisiY;
 
@@ -52,8 +53,11 @@ public class WorldViewer extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("Alien Encounters", Font.BOLD, 20));
-        if(this.controller.getGameFinish()){
-            g.drawString("YOU WIN", 200, 200);
+        if(this.controller.getStartSignal()){
+            g.drawImage(tutorial,0,0,null);
+        }
+        else if(this.controller.getGameFinish()){
+            g.drawString("YOU HAVE BEAT THE GAME", 100, 200);
             g.drawString(String.format("Score : %d", this.controller.getStep()),180,240);
         }
         else if(this.controller.getChip().getDead()){
@@ -127,5 +131,6 @@ public class WorldViewer extends JPanel {
             this.img[i] = ImageIO.read(temp);
         }
         this.imgChips = ImageIO.read(this.controller.getChip().sendCurrentURL());
+        this.tutorial = ImageIO.read(getClass().getClassLoader().getResource("chipTutorial.jpg"));
     }
 }
